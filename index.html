@@ -4,12 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KJ Fitness – הדרך שלך לגרסה הכי טובה של עצמך</title>
-    <meta name="google-site-verification" content="IaIan8TqYWaDXuc7kkfUvZFAm7i82vRH1DQ_aaLUsQQ" />
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        /* --- משתנים לעריכה קלה לפי הלוגו --- */
+        /* --- עיצוב --- */
         :root {
             --primary-color: #00bcd4; /* הטורקיז מהלוגו */
             --secondary-color: #1a1a1a; /* רקע כהה */
@@ -18,224 +17,87 @@
             --dark-text: #333333; /* טקסט כהה */
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Heebo', sans-serif;
-        }
-
-        body {
-            background-color: var(--secondary-color);
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Heebo', sans-serif; }
+        body { background-color: var(--secondary-color); color: var(--text-color); line-height: 1.6; }
         a { text-decoration: none; color: inherit; }
 
         /* --- Header --- */
         header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 5%;
-            background-color: rgba(0,0,0,0.9);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 10px 5%; background-color: rgba(0,0,0,0.9);
+            position: fixed; width: 100%; top: 0; z-index: 1000;
             border-bottom: 2px solid var(--primary-color);
         }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: var(--primary-color);
-            letter-spacing: 2px;
-            text-transform: uppercase;
+        
+        /* עיצוב לוגו תמונה */
+        .logo img {
+            height: 50px; /* גובה הלוגו */
+            width: auto;
+            vertical-align: middle;
         }
 
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 20px;
-        }
-
-        nav a {
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
+        nav ul { display: flex; list-style: none; gap: 20px; }
+        nav a { font-weight: 500; transition: color 0.3s; }
         nav a:hover { color: var(--primary-color); }
 
-        /* --- Hero Section --- */
+        /* --- Hero --- */
         .hero {
             height: 100vh;
             background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 20px;
-            margin-top: 60px;
+            background-size: cover; background-position: center;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 0 20px; margin-top: 60px;
         }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); text-transform: uppercase; }
+        .hero p { font-size: 1.5rem; margin-bottom: 30px; max-width: 600px; }
 
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-            text-transform: uppercase;
-        }
-
-        .hero p {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-            max-width: 600px;
-        }
-
-        /* --- CTA Button --- */
+        /* --- Buttons --- */
         .cta-button {
-            background-color: #ffffff;
-            color: var(--primary-color);
-            padding: 15px 30px;
-            font-size: 1.3rem;
-            font-weight: 700;
-            border-radius: 50px;
-            border: 2px solid var(--primary-color);
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
+            background-color: #ffffff; color: var(--primary-color);
+            padding: 15px 30px; font-size: 1.3rem; font-weight: 700;
+            border-radius: 50px; border: 2px solid var(--primary-color);
+            transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 10px;
         }
-
         .cta-button:hover {
-            background-color: var(--primary-color);
-            color: white;
+            background-color: var(--primary-color); color: white;
             box-shadow: 0 4px 15px rgba(0, 188, 212, 0.4);
-            transform: translateY(-3px);
-            cursor: pointer;
+            transform: translateY(-3px); cursor: pointer;
         }
 
-        /* --- Section General --- */
-        .section {
-            padding: 80px 10%;
-            text-align: center;
-        }
+        /* --- Sections --- */
+        .section { padding: 80px 10%; text-align: center; }
+        .section-title { font-size: 2.5rem; margin-bottom: 40px; position: relative; display: inline-block; }
+        .section-title::after { content: ''; display: block; width: 50%; height: 4px; background: var(--primary-color); margin: 10px auto 0; }
 
-        .section-title {
-            font-size: 2.5rem;
-            margin-bottom: 40px;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 50%;
-            height: 4px;
-            background: var(--primary-color);
-            margin: 10px auto 0;
-        }
-
-        /* --- About Section --- */
-        #about {
-            background-color: var(--light-bg);
-            color: var(--dark-text);
-        }
-        
+        #about { background-color: var(--light-bg); color: var(--dark-text); }
         #about .section-title { color: var(--secondary-color); }
-
-        .about-content {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: center;
-            gap: 40px;
-            text-align: right;
-        }
-
-        .about-text {
-            flex: 1;
-            min-width: 300px;
-            font-size: 1.1rem;
-        }
-
-        .about-image {
-            flex: 1;
-            min-width: 300px;
-            max-width: 400px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-
-        .about-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        /* --- Contact Section --- */
-        #contact {
-            background-color: var(--secondary-color);
-            color: white;
-        }
         
+        .about-content { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 40px; text-align: right; }
+        .about-text { flex: 1; min-width: 300px; font-size: 1.1rem; }
+        .about-image { flex: 1; min-width: 300px; max-width: 400px; border-radius: 10px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        .about-image img { width: 100%; height: auto; display: block; }
+
+        #contact { background-color: var(--secondary-color); color: white; }
         #contact .section-title { color: white; }
+        .contact-container { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 30px; }
+        .contact-item { background: rgba(255,255,255,0.1); padding: 30px; border-radius: 10px; width: 250px; transition: transform 0.3s; }
+        .contact-item:hover { transform: translateY(-5px); background: rgba(255,255,255,0.15); }
+        .contact-item i { font-size: 2rem; color: var(--primary-color); margin-bottom: 15px; }
 
-        .contact-container {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            margin-top: 30px;
-        }
-
-        .contact-item {
-            background: rgba(255,255,255,0.1);
-            padding: 30px;
-            border-radius: 10px;
-            width: 250px;
-            transition: transform 0.3s;
-        }
-
-        .contact-item:hover {
-            transform: translateY(-5px);
-            background: rgba(255,255,255,0.15);
-        }
-
-        .contact-item i {
-            font-size: 2rem;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-        }
-
-        /* --- Footer --- */
-        footer {
-            background-color: black;
-            color: #777;
-            padding: 20px;
-            text-align: center;
-            font-size: 0.9rem;
-        }
-
+        footer { background-color: black; color: #777; padding: 20px; text-align: center; font-size: 0.9rem; }
         @media (max-width: 768px) {
-            header { padding: 15px; }
-            .hero h1 { font-size: 2.5rem; }
-            .about-content { text-align: center; }
-            nav ul { gap: 10px; font-size: 0.9rem; }
-            .cta-button { font-size: 1.1rem; padding: 12px 20px; }
+            header { padding: 15px; } .hero h1 { font-size: 2.5rem; }
+            nav ul { gap: 10px; font-size: 0.9rem; } .cta-button { font-size: 1.1rem; padding: 12px 20px; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo">KJ FITNESS</div> <nav>
+        <div class="logo">
+            <img src="kj fitness.jpg" alt="KJ FITNESS">
+        </div> 
+        <nav>
             <ul>
                 <li><a href="#hero">ראשי</a></li>
                 <li><a href="#about">אודות</a></li>
@@ -248,7 +110,7 @@
         <h1>KJ FITNESS</h1>
         <p>להגיע לתוצאות, להרגיש חזק/ה, ולהתאהב בתהליך.</p>
         
-        <a href="https://wa.me/972500000000?text=היי,%20אשמח%20לשמוע%20פרטים%20על%20אימונים%20ולתאם%20פגישה" class="cta-button" target="_blank">
+        <a href="https://wa.me/972533985895?text=היי,%20אשמח%20לשמוע%20פרטים%20על%20אימונים%20ולתאם%20פגישה" class="cta-button" target="_blank">
             <i class="fab fa-whatsapp"></i>
             להפוך לגרסה הכי טובה של עצמך
         </a>
@@ -263,11 +125,11 @@
             <div class="about-text">
                 <h3>היי, קוראים לי ג'מה ואני המאמנת שלך</h3>
                 <p>
-                  ' write everything u want people to know about you, your past, your experience.'
+                  כאן תרשום את כל מה שחשוב שיידעו עליה...
                 </p>
                 <br>
                 <p>
-                   write what makes you different from others, what makes you special
+                   מה מיוחד בה וכו'...
                 </p>
             </div>
         </div>
@@ -278,20 +140,22 @@
         <p>מוכן/ה להתחיל? יש לך שאלות? אני זמינה לכל דבר.</p>
         
         <div class="contact-container">
-            <a href="https://wa.me/972500000000" target="_blank" class="contact-item">
+            <a href="https://wa.me/972533985895" target="_blank" class="contact-item">
                 <i class="fab fa-whatsapp"></i>
                 <h3>וואטסאפ</h3>
-                <p>שלח/י הודעה לתיאום</p> </a>
+                <p>שלח/י הודעה לתיאום</p> 
+            </a>
             
-            <a href="https://instagram.com/kjfitness_official" target="_blank" class="contact-item">
+            <a href="https://www.instagram.com/kj__fitness__/" target="_blank" class="contact-item">
                 <i class="fab fa-instagram"></i>
                 <h3>אינסטגרם</h3>
-                <p>עקוב/י אחרי באינסטגרם</p> </a>
+                <p>עקוב/י אחרי באינסטגרם</p> 
+            </a>
 
             <div class="contact-item">
                 <i class="fas fa-map-marker-alt"></i>
-                <h3>סטודיו</h3>
-                <p>תל אביב / המיקום שלה</p>
+                <h3>מיקום</h3>
+                <p>איפה שתרצו</p>
             </div>
         </div>
     </section>
@@ -302,4 +166,3 @@
 
 </body>
 </html>
-
