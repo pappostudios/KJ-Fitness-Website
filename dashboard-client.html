@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KJ Fitness - דשבורד לקוח</title>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root{--primary:#00bcd4;--bg:#1a1a1a;--card:rgba(255,255,255,0.05);--border:rgba(0,188,212,0.3);}
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Heebo',sans-serif;}
+    body{background:var(--bg);color:#fff;min-height:100vh;}
+    header{background:rgba(0,0,0,0.9);border-bottom:2px solid var(--primary);padding:14px 5%;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;}
+    .hdr-logo{display:flex;align-items:center;gap:12px;}
+    .hdr-logo img{height:40px;}
+    .hdr-logo span{font-size:1.3rem;font-weight:700;color:var(--primary);}
+    .hdr-right{display:flex;align-items:center;gap:16px;}
+    .welcome{font-size:.95rem;color:#ccc;}
+    .logout-btn{background:transparent;border:1px solid var(--primary);color:var(--primary);padding:8px 16px;border-radius:6px;cursor:pointer;font-family:'Heebo',sans-serif;font-size:.9rem;transition:all .3s;}
+    .logout-btn:hover{background:var(--primary);color:#fff;}
+    .main{padding:30px 5%;max-width:900px;margin:0 auto;}
+    .tabs-nav{display:flex;gap:8px;margin-bottom:28px;flex-wrap:wrap;}
+    .tnav{background:var(--card);border:1px solid var(--border);color:#ccc;padding:10px 22px;border-radius:8px;cursor:pointer;font-family:'Heebo',sans-serif;font-size:1rem;font-weight:600;transition:all .3s;}
+    .tnav.active{background:var(--primary);border-color:var(--primary);color:#fff;}
+    .tab-content{display:none;}
+    .tab-content.active{display:block;}
+    h2{font-size:1.6rem;margin-bottom:22px;color:var(--primary);}
+    .week-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;}
+    .day-card{background:rgba(0,188,212,0.08);border:1px solid var(--border);border-radius:10px;padding:16px;text-align:center;}
+    .day-card h4{color:var(--primary);margin-bottom:10px;font-size:1rem;}
+    .day-card .slot{background:rgba(0,188,212,0.15);border-radius:5px;padding:5px 10px;margin:3px 0;font-size:.85rem;color:#ddd;}
+    .no-slots{color:#555;font-size:.85rem;}
+    .chat-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;}
+    .msg-thread{max-height:350px;overflow-y:auto;margin-bottom:16px;padding:10px;background:rgba(0,0,0,0.3);border-radius:10px;}
+    .msg-bubble{margin:6px 0;padding:9px 14px;border-radius:9px;font-size:.9rem;max-width:80%;}
+    .msg-bubble.coach{background:rgba(0,188,212,0.25);margin-right:auto;}
+    .msg-bubble.client{background:rgba(255,255,255,0.12);margin-left:auto;text-align:right;}
+    .msg-meta{font-size:.72rem;color:#888;margin-top:3px;}
+    .msg-compose{display:flex;gap:10px;}
+    .msg-compose input{flex:1;padding:11px 14px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:8px;color:#fff;font-family:'Heebo',sans-serif;font-size:.95rem;}
+    .msg-compose input:focus{outline:none;border-color:var(--primary);}
+    .msg-compose button{padding:11px 18px;background:var(--primary);border:none;border-radius:8px;color:#fff;cursor:pointer;font-family:'Heebo',sans-serif;font-size:.95rem;transition:all .3s;}
+    .msg-compose button:hover{background:#00a3b8;}
+    .badge{display:inline-block;background:#ff5252;color:#fff;border-radius:20px;padding:2px 9px;font-size:.78rem;margin-right:6px;}
+    .empty-msg{text-align:center;color:#555;padding:30px;font-size:.95rem;}
+    @media(max-width:600px){.main{padding:18px 4%;} .week-grid{grid-template-columns:repeat(2,1fr);}}
+  </style>
+</head>
+<body>
+<header>
+  <div class="hdr-logo">
+    <img src="kj fitness.jpg" alt="KJ" onerror="this.style.display='none'">
+    <span>KJ FITNESS</span>
+  </div>
+  <div class="hdr-right">
+    <span class="welcome" id="welcomeMsg"></span>
+    <button class="logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> יציאה</button>
+  </div>
+</header>
+<div class="main">
+  <div class="tabs-nav">
+    <button class="tnav active" onclick="showTab('schedule',event)"><i class="fas fa-calendar-alt"></i> לוח זמנים</button>
+    <button class="tnav" id="msgTabBtn" onclick="showTab('messages',event)"><i class="fas fa-comment-dots"></i> הודעות למאמנת</button>
+  </div>
+
+  <div id="tab-schedule" class="tab-content active">
+    <h2>שעות פנויות של המאמנת</h2>
+    <p style="color:#aaa;margin-bottom:20px;font-size:.95rem;">ראה/י את השעות הזמינות לאימון השבוע. ליצירת קשר לתיאום שלח/י הודעה לאמנת.</p>
+    <div class="week-grid" id="weekGrid"></div>
+  </div>
+
+  <div id="tab-messages" class="tab-content">
+    <h2>שיחה עם המאמנת</h2>
+    <div class="chat-box">
+      <div class="msg-thread" id="msgThread"></div>
+      <div class="msg-compose">
+        <input id="msgInput" type="text" placeholder="כתוב/י הודעה למאמנת...">
+        <button onclick="sendMsg()"><i class="fas fa-paper-plane"></i> שלח</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function getSession(){return JSON.parse(localStorage.getItem('kjSession')||'null');}
+  function getSchedule(){return JSON.parse(localStorage.getItem('kjSchedule')||'{}');}
+  function getMessages(){return JSON.parse(localStorage.getItem('kjMessages')||'[]');}
+  function saveMessages(m){localStorage.setItem('kjMessages',JSON.stringify(m));}
+
+  var session=getSession();
+  if(!session||session.role!=='client'){window.location.href='login.html';}
+  document.getElementById('welcomeMsg').textContent='שלום, '+session.name;
+
+  function logout(){localStorage.removeItem('kjSession');window.location.href='index.html';}
+
+  function showTab(t,e){
+    document.querySelectorAll('.tab-content').forEach(function(el){el.classList.remove('active');});
+    document.querySelectorAll('.tnav').forEach(function(el){el.classList.remove('active');});
+    document.getElementById('tab-'+t).classList.add('active');
+    if(e&&e.currentTarget) e.currentTarget.classList.add('active');
+    if(t==='messages'){renderMessages();markRead();}
+  }
+
+  var DAYS=['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'];
+
+  function renderSchedule(){
+    var sched=getSchedule();
+    var grid=document.getElementById('weekGrid');
+    grid.innerHTML='';
+    var hasAny=false;
+    DAYS.forEach(function(day){
+      var slots=sched[day]||[];
+      var card=document.createElement('div');
+      card.className='day-card';
+      var html=slots.length?slots.map(function(s){return '<div class="slot">'+s+'</div>';}).join(''):'<div class="no-slots">לא זמין</div>';
+      if(slots.length) hasAny=true;
+      card.innerHTML='<h4>'+day+'</h4>'+html;
+      grid.appendChild(card);
+    });
+    if(!hasAny){
+      var info=document.createElement('p');
+      info.style.cssText='color:#777;grid-column:1/-1;text-align:center;padding:30px;';
+      info.textContent='המאמנת עדיין לא עדכנה שעות פנויות. שלח/י הודעה לתיאום.';
+      grid.appendChild(info);
+    }
+  }
+
+  function renderMessages(){
+    var msgs=getMessages().filter(function(m){return m.clientUsername===session.username;});
+    var thread=document.getElementById('msgThread');
+    if(!msgs.length){thread.innerHTML='<div class="empty-msg"><i class="fas fa-comment" style="font-size:2rem;color:#444;display:block;margin-bottom:10px"></i>עדיין אין הודעות. שלח/י הודעה ראשונה!</div>';return;}
+    thread.innerHTML=msgs.map(function(m){
+      var ic=m.from==='coach';
+      return '<div class="msg-bubble '+(ic?'coach':'client')+'">'+m.text+'<div class="msg-meta">'+(ic?'המאמנת':'את/ה')+' &bull; '+m.time+'</div></div>';
+    }).join('');
+    setTimeout(function(){thread.scrollTop=thread.scrollHeight;},50);
+  }
+
+  function markRead(){
+    var msgs=getMessages();
+    var changed=false;
+    msgs.forEach(function(m){if(m.clientUsername===session.username&&m.from==='coach'&&!m.readByClient){m.readByClient=true;changed=true;}});
+    if(changed){saveMessages(msgs);updateUnreadBadge();}
+  }
+
+  function updateUnreadBadge(){
+    var msgs=getMessages();
+    var unread=msgs.filter(function(m){return m.clientUsername===session.username&&m.from==='coach'&&!m.readByClient;}).length;
+    var btn=document.getElementById('msgTabBtn');
+    btn.innerHTML='<i class="fas fa-comment-dots"></i> הודעות למאמנת'+(unread?'&nbsp;<span class="badge">'+unread+'</span>':'');
+  }
+
+  function sendMsg(){
+    var input=document.getElementById('msgInput');
+    var text=input.value.trim();
+    if(!text) return;
+    var msgs=getMessages();
+    var now=new Date();
+    var t=now.toLocaleDateString('he-IL')+' '+now.toLocaleTimeString('he-IL',{hour:'2-digit',minute:'2-digit'});
+    msgs.push({clientUsername:session.username,from:'client',text:text,time:t,readByCoach:false,readByClient:true});
+    saveMessages(msgs);
+    input.value='';
+    renderMessages();
+  }
+
+  document.getElementById('msgInput').addEventListener('keydown',function(e){if(e.key==='Enter') sendMsg();});
+
+  renderSchedule();
+  updateUnreadBadge();
+</script>
+</body>
+</html>
