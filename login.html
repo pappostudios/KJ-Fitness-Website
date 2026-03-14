@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KJ Fitness - התחברות</title>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root { --primary: #00bcd4; --bg: #1a1a1a; }
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Heebo',sans-serif; }
+    body { background:var(--bg); color:#fff; min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:20px; }
+    .logo-h { text-align:center; margin-bottom:28px; }
+    .logo-h img { height:55px; }
+    .logo-h h1 { color:var(--primary); font-size:1.8rem; margin-top:6px; }
+    .box { background:rgba(255,255,255,0.05); border:1px solid rgba(0,188,212,0.3); border-radius:16px; padding:36px; width:100%; max-width:400px; }
+    .tabs { display:flex; border-radius:8px; overflow:hidden; border:1px solid rgba(0,188,212,0.4); margin-bottom:28px; }
+    .tab { flex:1; padding:11px; background:transparent; color:#aaa; border:none; cursor:pointer; font-size:1rem; font-family:'Heebo',sans-serif; font-weight:600; transition:all .3s; }
+    .tab.active { background:var(--primary); color:#fff; }
+    .panel { display:none; }
+    .panel.active { display:block; }
+    .fg { margin-bottom:16px; }
+    .fg label { display:block; margin-bottom:5px; font-size:.9rem; color:#ccc; }
+    .fg input { width:100%; padding:11px 14px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); border-radius:8px; color:#fff; font-size:1rem; font-family:'Heebo',sans-serif; }
+    .fg input:focus { outline:none; border-color:var(--primary); }
+    .btn { width:100%; padding:13px; background:var(--primary); color:#fff; border:none; border-radius:8px; font-size:1.1rem; font-weight:700; font-family:'Heebo',sans-serif; cursor:pointer; margin-top:6px; transition:all .3s; }
+    .btn:hover { background:#00a3b8; transform:translateY(-2px); }
+    .msg { margin-top:12px; padding:9px 13px; border-radius:7px; font-size:.9rem; text-align:center; display:none; }
+    .msg.err { background:rgba(255,80,80,.2); border:1px solid rgba(255,80,80,.4); color:#ff9999; display:block; }
+    .msg.ok { background:rgba(0,188,212,.2); border:1px solid rgba(0,188,212,.4); color:#00e5ff; display:block; }
+    .back { margin-top:18px; text-align:center; color:#aaa; font-size:.9rem; }
+    .back a { color:var(--primary); text-decoration:none; }
+  </style>
+</head>
+<body>
+  <div class="logo-h">
+    <img src="kj fitness.jpg" alt="KJ Fitness" onerror="this.style.display='none'">
+    <h1>KJ FITNESS</h1>
+  </div>
+  <div class="box">
+    <div class="tabs">
+      <button class="tab active" onclick="sw('login')">התחברות</button>
+      <button class="tab" onclick="sw('reg')">הרשמה</button>
+    </div>
+    <div id="loginP" class="panel active">
+      <div class="fg"><label>שם משתמש</label><input id="lu" type="text" placeholder="שם משתמש" autocomplete="username"></div>
+      <div class="fg"><label>סיסמה</label><input id="lp" type="password" placeholder="סיסמה" autocomplete="current-password"></div>
+      <button class="btn" onclick="login()">התחבר/י</button>
+      <div id="lm" class="msg"></div>
+    </div>
+    <div id="regP" class="panel">
+      <div class="fg"><label>שם מלא</label><input id="rn" type="text" placeholder="השם שלך"></div>
+      <div class="fg"><label>שם משתמש</label><input id="ru" type="text" placeholder="בחר שם משתמש"></div>
+      <div class="fg"><label>סיסמה</label><input id="rp" type="password" placeholder="לפחות 6 תווים" autocomplete="new-password"></div>
+      <button class="btn" onclick="reg()">הרשמה</button>
+      <div id="rm" class="msg"></div>
+    </div>
+  </div>
+  <div class="back"><a href="index.html"><i class="fas fa-arrow-right"></i> חזרה לאתר</a></div>
+  <script>
+    (function(){
+      var users = JSON.parse(localStorage.getItem('kjUsers')||'[]');
+      if(!users.find(function(u){return u.username==='kj_coach';})){
+        users.push({username:'kj_coach',password:'coach123',name:"KJ המאמנת",role:'coach'});
+        localStorage.setItem('kjUsers',JSON.stringify(users));
+      }
+    })();
+    function sw(t){
+      document.getElementById('loginP').classList.toggle('active',t==='login');
+      document.getElementById('regP').classList.toggle('active',t==='reg');
+      var tabs=document.querySelectorAll('.tab');
+      tabs[0].classList.toggle('active',t==='login');
+      tabs[1].classList.toggle('active',t==='reg');
+    }
+    function login(){
+      var u=document.getElementById('lu').value.trim();
+      var p=document.getElementById('lp').value;
+      var m=document.getElementById('lm');
+      m.className='msg';
+      if(!u||!p){m.textContent='יש למלא את כל השדות';m.className='msg err';return;}
+      var users=JSON.parse(localStorage.getItem('kjUsers')||'[]');
+      var found=users.find(function(x){return x.username===u&&x.password===p;});
+      if(!found){m.textContent='שם משתמש או סיסמה שגויים';m.className='msg err';return;}
+      localStorage.setItem('kjSession',JSON.stringify({username:found.username,name:found.name,role:found.role}));
+      m.textContent='מתחבר/ת...';m.className='msg ok';
+      setTimeout(function(){window.location.href=found.role==='coach'?'dashboard-coach.html':'dashboard-client.html';},700);
+    }
+    function reg(){
+      var n=document.getElementById('rn').value.trim();
+      var u=document.getElementById('ru').value.trim();
+      var p=document.getElementById('rp').value;
+      var m=document.getElementById('rm');
+      m.className='msg';
+      if(!n||!u||!p){m.textContent='יש למלא את כל השדות';m.className='msg err';return;}
+      if(p.length<6){m.textContent='הסיסמה חייבת להכיל לפחות 6 תווים';m.className='msg err';return;}
+      var users=JSON.parse(localStorage.getItem('kjUsers')||'[]');
+      if(users.find(function(x){return x.username===u;})){m.textContent='שם המשתמש כבר תפוס';m.className='msg err';return;}
+      users.push({username:u,password:p,name:n,role:'client'});
+      localStorage.setItem('kjUsers',JSON.stringify(users));
+      m.textContent='נרשמת בהצלחה! ניתן להתחבר';m.className='msg ok';
+      setTimeout(function(){sw('login');},1500);
+    }
+  </script>
+</body>
+</html>
