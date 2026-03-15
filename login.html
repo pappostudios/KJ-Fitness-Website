@@ -82,7 +82,10 @@
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
     import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, sendPasswordResetEmail, updateProfile } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
     import { getFirestore, doc, setDoc, getDoc } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
-    const COACH_EMAIL = 'pappostudios@gmail.com';
+
+    const COACH_EMAILS = ['pappostudios@gmail.com', 'kjfitness.info@gmail.com'];
+    function isCoach(email) { return COACH_EMAILS.includes(email.toLowerCase()); }
+
     const firebaseConfig = {
       apiKey: "AIzaSyBJDYiwXugrAaoOvoeuExHn_mMNgxN3Kpg",
       authDomain: "kj-fitness-80723.firebaseapp.com",
@@ -94,14 +97,15 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
+
     async function saveUserProfile(user, name) {
-      const role = user.email.toLowerCase() === COACH_EMAIL.toLowerCase() ? 'coach' : 'client';
+      const role = isCoach(user.email) ? 'coach' : 'client';
       await setDoc(doc(db, 'users', user.uid), { uid: user.uid, email: user.email, name: name || user.displayName || user.email.split('@')[0], role: role }, { merge: true });
       return role;
     }
     async function redirectUser(user) {
       const snap = await getDoc(doc(db, 'users', user.uid));
-      const role = snap.exists() ? snap.data().role : (user.email.toLowerCase() === COACH_EMAIL.toLowerCase() ? 'coach' : 'client');
+      const role = snap.exists() ? snap.data().role : (isCoach(user.email) ? 'coach' : 'client');
       window.location.href = role === 'coach' ? 'dashboard-coach.html' : 'dashboard-client.html';
     }
     window.sw = function(t) {
