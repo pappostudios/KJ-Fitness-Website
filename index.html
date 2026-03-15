@@ -110,14 +110,26 @@
     <p>&copy; 2026 KJ Fitness. כל הזכויות שמורות.</p>
   </footer>
 
-  <script>
-    var s=JSON.parse(localStorage.getItem('kjSession')||'null');
-    if(s){
-      var btn=document.getElementById('loginNavBtn');
-      document.getElementById('loginBtnText').textContent=s.name;
-      document.getElementById('loginIcon').className='fas fa-tachometer-alt';
-      btn.href=s.role==='coach'?'dashboard-coach.html':'dashboard-client.html';
-    }
-  </script>
+  <script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+const COACH_EMAILS = ['pappostudios@gmail.com', 'kjfitness.info@gmail.com'];
+const firebaseConfig = { apiKey: "AIzaSyBJDYiwXugrAaoOvoeuExHn_mMNgxN3Kpg", authDomain: "kj-fitness-80723.firebaseapp.com", projectId: "kj-fitness-80723", storageBucket: "kj-fitness-80723.firebasestorage.app", messagingSenderId: "525333297888", appId: "1:525333297888:web:7246851d44b70d9904ee85" };
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+onAuthStateChanged(auth, async function(user) {
+  if (user) {
+    const snap = await getDoc(doc(db, 'users', user.uid));
+    const name = snap.exists() ? snap.data().name : user.displayName || user.email.split('@')[0];
+    const role = snap.exists() ? snap.data().role : (COACH_EMAILS.includes(user.email.toLowerCase()) ? 'coach' : 'client');
+    const btn = document.getElementById('loginNavBtn');
+    document.getElementById('loginBtnText').textContent = name;
+    document.getElementById('loginIcon').className = 'fas fa-tachometer-alt';
+    btn.href = role === 'coach' ? 'dashboard-coach.html' : 'dashboard-client.html';
+  }
+});
+</script>
 </body>
 </html>
