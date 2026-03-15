@@ -20,7 +20,7 @@
     .logout-btn:hover{background:var(--primary);color:#fff;}
     .main{padding:30px 5%;max-width:1200px;margin:0 auto;}
     .tabs-nav{display:flex;gap:8px;margin-bottom:28px;flex-wrap:wrap;}
-    .tnav{background:var(--card);border:1px solid var(--border);color:#ccc;padding:10px 22px;border-radius:8px;cursor:pointer;font-family:'Heebo',sans-serif;font-size:1rem;font-weight:600;transition:all .3s;}
+    .tnav{background:var(--card);border:1px solid var(--border);color:#ccc;padding:10px 22px;border-radius:8px;cursor:pointer;fonht-family:'Heebo',sans-serif;font-size:1rem;font-weight:600;transition:all .3s;}
     .tnav.active{background:var(--primary);border-color:var(--primary);color:#fff;}
     .tab-content{display:none;}
     .tab-content.active{display:block;}
@@ -79,8 +79,8 @@
     <div id="clientList" class="client-list"></div>
   </div>
 </div>
-<script>
-  var DAYS=['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'];
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'];
   var HOURS=[];
   for(var h=6;h<=22;h++){HOURS.push((h<10?'0':'')+h+':00');HOURS.push((h<10?'0':'')+h+':30');}
   function getSession(){return JSON.parse(localStorage.getItem('kjSession')||'null');}
@@ -93,15 +93,15 @@
   if(!session||session.role!=='coach'){window.location.href='login.html';}
   document.getElementById('welcomeMsg').textContent='שלום, '+session.name;
   function logout(){localStorage.removeItem('kjSession');window.location.href='index.html';}
-  function showTab(t,e){
+  window.showTab = function(t,e){
     document.querySelectorAll('.tab-content').forEach(function(el){el.classList.remove('active');});
     document.querySelectorAll('.tnav').forEach(function(el){el.classList.remove('active');});
     document.getElementById('tab-'+t).classList.add('active');
     if(e&&e.currentTarget) e.currentTarget.classList.add('active');
     if(t==='clients') renderClients();
   }
-  function renderSchedule(){
-    var sched=getSchedule();
+  async function renderSchedule(){
+    var sched=await getSchedule();
     var grid=document.getElementById('weekGrid');
     grid.innerHTML='';
     DAYS.forEach(function(day){
@@ -114,49 +114,49 @@
       grid.appendChild(card);
     });
   }
-  function addSlot(day){
+  window.addSlot = async function(day){
     var sel=document.getElementById('sel-'+day);
     var time=sel.value;
-    var sched=getSchedule();
+    var sched=await getSchedule();
     if(!sched[day]) sched[day]=[];
-    if(sched[day].indexOf(time)===-1){sched[day].push(time);sched[day].sort();saveSchedule(sched);renderSchedule();}
+    if(sched[day].indexOf(time)===-1){sched[day].push(time);sched[day].sort();saveSchedule(sched);// renderSchedule called after auth}
   }
   function delSlot(day,idx){
-    var sched=getSchedule();
+    var sched=await getSchedule();
     if(sched[day]) sched[day].splice(idx,1);
-    saveSchedule(sched);renderSchedule();
+    saveSchedule(sched);// renderSchedule called after auth
   }
-  function renderClients(){
-    var users=getUsers().filter(function(u){return u.role==='client';});
-    var msgs=getMessages();
+  async function renderClients(){
+    var users=await getClients();
+    var msgs=[];
     var container=document.getElementById('clientList');
     if(!users.length){container.innerHTML='<div class="empty-state"><i class="fas fa-user-slash" style="font-size:2rem;color:#555;display:block;margin-bottom:12px"></i>אין לקוחות רשומים עדיין</div>';return;}
     container.innerHTML='';
     var updated=false;
     users.forEach(function(u){
-      var thread=msgs.filter(function(m){return m.clientUsername===u.username;});
-      var unread=thread.filter(function(m){return m.from==='client'&&!m.readByCoach;}).length;
+      var thread=await getMessages(u.uid);
+      var unread=thread.filter(function(m){return m.from==='client'&&!m.readByCoach;}).length; var clientKey=u.uid||u.email;
       var threadHtml=thread.length?thread.map(function(m){var ic=m.from==='coach';return '<div class="msg-bubble '+(ic?'coach':'client')+'">'+m.text+'<div class="msg-meta">'+(ic?'את':'לקוח/ה')+' &bull; '+m.time+'</div></div>';}).join(''):'<div style="color:#555;font-size:.85rem;text-align:center;padding:8px">אין הודעות</div>';
       var card=document.createElement('div');
       card.className='client-card';
       card.innerHTML='<h4>'+u.name+(unread?'&nbsp;<span class="badge">'+unread+' חדש</span>':'')+'</h4><div class="username">@'+u.username+'</div><div class="msg-thread" id="thr-'+u.username+'">'+threadHtml+'</div><div class="msg-compose"><input id="ci-'+u.username+'" type="text" placeholder="כתבי הודעה ללקוח..."><button onclick="sendTo(''+u.username+'')"><i class="fas fa-paper-plane"></i></button></div>';
       container.appendChild(card);
       msgs.forEach(function(m){if(m.clientUsername===u.username&&m.from==='client'&&!m.readByCoach){m.readByCoach=true;updated=true;}});
-      setTimeout(function(uid){return function(){var t=document.getElementById('thr-'+uid);if(t)t.scrollTop=t.scrollHeight;};}(u.username),50);
+      setTimeout(function(uid){return function(){var t=document.getElementById('thr-'+uid);if(t)t.scrollTop=t.scrollHeight;};}(clientKey),50);
     });
-    if(updated) saveMessages(msgs);
+    // messages saved to Firestore
   }
   function sendTo(cu){
     var input=document.getElementById('ci-'+cu);
     var text=input.value.trim();
     if(!text) return;
-    var msgs=getMessages();
+    var msgs=[];
     var now=new Date();
     var t=now.toLocaleDateString('he-IL')+' '+now.toLocaleTimeString('he-IL',{hour:'2-digit',minute:'2-digit'});
     msgs.push({clientUsername:cu,from:'coach',text:text,time:t,readByClient:false,readByCoach:true});
     saveMessages(msgs);input.value='';renderClients();
   }
-  renderSchedule();
+  // renderSchedule called after auth
 </script>
 </body>
 </html>
