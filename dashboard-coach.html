@@ -11,7 +11,7 @@
     *{margin:0;padding:0;box-sizing:border-box;font-family:'Heebo',sans-serif;}
     body{background:var(--bg);color:#fff;min-height:100vh;}
     header{background:rgba(0,0,0,0.9);border-bottom:2px solid var(--primary);padding:14px 5%;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;}
-    .hdr-logo{display:flex;align-items:center;gap:12px;}
+    .hdr-logo{display:flex;align-items:center;gap:12px;cursor:pointer;}
     .hdr-logo img{height:40px;}
     .hdr-logo span{font-size:1.3rem;font-weight:700;color:var(--primary);}
     .hdr-right{display:flex;align-items:center;gap:16px;}
@@ -55,10 +55,10 @@
 </head>
 <body>
   <header>
-    <div class="hdr-logo">
+    <a href="index.html" class="hdr-logo" style="text-decoration:none;">
       <img src="kj fitness.jpg" alt="KJ" onerror="this.style.display='none'">
       <span>KJ FITNESS - מאמנת</span>
-    </div>
+    </a>
     <div class="hdr-right">
       <span class="welcome" id="welcomeMsg"></span>
       <button class="logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> יציאה</button>
