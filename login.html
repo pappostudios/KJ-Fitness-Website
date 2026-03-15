@@ -1,105 +1,197 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KJ Fitness - התחברות</title>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KJ Fitness - התחברות</title>
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
-    :root { --primary: #00bcd4; --bg: #1a1a1a; }
-    * { margin:0; padding:0; box-sizing:border-box; font-family:'Heebo',sans-serif; }
-    body { background:var(--bg); color:#fff; min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:20px; }
-    .logo-h { text-align:center; margin-bottom:28px; }
-    .logo-h img { height:55px; }
-    .logo-h h1 { color:var(--primary); font-size:1.8rem; margin-top:6px; }
-    .box { background:rgba(255,255,255,0.05); border:1px solid rgba(0,188,212,0.3); border-radius:16px; padding:36px; width:100%; max-width:400px; }
-    .tabs { display:flex; border-radius:8px; overflow:hidden; border:1px solid rgba(0,188,212,0.4); margin-bottom:28px; }
-    .tab { flex:1; padding:11px; background:transparent; color:#aaa; border:none; cursor:pointer; font-size:1rem; font-family:'Heebo',sans-serif; font-weight:600; transition:all .3s; }
-    .tab.active { background:var(--primary); color:#fff; }
-    .panel { display:none; }
-    .panel.active { display:block; }
-    .fg { margin-bottom:16px; }
-    .fg label { display:block; margin-bottom:5px; font-size:.9rem; color:#ccc; }
-    .fg input { width:100%; padding:11px 14px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); border-radius:8px; color:#fff; font-size:1rem; font-family:'Heebo',sans-serif; }
-    .fg input:focus { outline:none; border-color:var(--primary); }
-    .btn { width:100%; padding:13px; background:var(--primary); color:#fff; border:none; border-radius:8px; font-size:1.1rem; font-weight:700; font-family:'Heebo',sans-serif; cursor:pointer; margin-top:6px; transition:all .3s; }
-    .btn:hover { background:#00a3b8; transform:translateY(-2px); }
-    .msg { margin-top:12px; padding:9px 13px; border-radius:7px; font-size:.9rem; text-align:center; display:none; }
-    .msg.err { background:rgba(255,80,80,.2); border:1px solid rgba(255,80,80,.4); color:#ff9999; display:block; }
-    .msg.ok { background:rgba(0,188,212,.2); border:1px solid rgba(0,188,212,.4); color:#00e5ff; display:block; }
-    .back { margin-top:18px; text-align:center; color:#aaa; font-size:.9rem; }
-    .back a { color:var(--primary); text-decoration:none; }
-  </style>
-</head>
-<body>
-  <div class="logo-h">
-    <img src="kj fitness.jpg" alt="KJ Fitness" onerror="this.style.display='none'">
-    <h1>KJ FITNESS</h1>
-  </div>
+    :root{--primary:#00bcd4;--bg:#1a1a1a;}
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Heebo',sans-serif;}
+    body{background:var(--bg);color:#fff;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;}
+    .logo-h{text-align:center;margin-bottom:28px;}
+    .logo-h img{height:55px;}
+    .logo-h h1{color:var(--primary);font-size:1.8rem;margin-top:6px;}
+    .box{background:rgba(255,255,255,0.05);border:1px solid rgba(0,188,212,0.3);border-radius:16px;padding:36px;width:100%;max-width:400px;}
+    .tabs{display:flex;border-radius:8px;overflow:hidden;border:1px solid rgba(0,188,212,0.4);margin-bottom:28px;}
+    .tab{flex:1;padding:11px;background:transparent;color:#aaa;border:none;cursor:pointer;font-size:1rem;font-family:'Heebo',sans-serif;font-weight:600;transition:all .3s;}
+    .tab.active{background:var(--primary);color:#fff;}
+    .panel{display:none;}
+    .panel.active{display:block;}
+    .fg{margin-bottom:16px;}
+    .fg label{display:block;margin-bottom:5px;font-size:.9rem;color:#ccc;}
+    .fg input{width:100%;padding:11px 14px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:8px;color:#fff;font-size:1rem;font-family:'Heebo',sans-serif;}
+    .fg input:focus{outline:none;border-color:var(--primary);}
+    .btn{width:100%;padding:13px;background:var(--primary);color:#fff;border:none;border-radius:8px;font-size:1.1rem;font-weight:700;font-family:'Heebo',sans-serif;cursor:pointer;margin-top:6px;transition:all .3s;}
+    .btn:hover{background:#00a3b8;transform:translateY(-2px);}
+    .btn-google{width:100%;padding:13px;background:#fff;color:#444;border:1px solid #ddd;border-radius:8px;font-size:1rem;font-weight:600;font-family:'Heebo',sans-serif;cursor:pointer;margin-top:10px;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:10px;}
+    .btn-google:hover{background:#f5f5f5;transform:translateY(-2px);}
+    .btn-google img{width:20px;height:20px;}
+    .divider{display:flex;align-items:center;gap:10px;margin:16px 0;color:#666;font-size:.85rem;}
+    .divider::before,.divider::after{content:'';flex:1;height:1px;background:rgba(255,255,255,0.1);}
+    .msg{margin-top:12px;padding:9px 13px;border-radius:7px;font-size:.9rem;text-align:center;display:none;}
+    .msg.err{background:rgba(255,80,80,.2);border:1px solid rgba(255,80,80,.4);color:#ff9999;display:block;}
+    .msg.ok{background:rgba(0,188,212,.2);border:1px solid rgba(0,188,212,.4);color:#00e5ff;display:block;}
+    .forgot{text-align:left;margin-top:8px;font-size:.85rem;}
+    .forgot a{color:var(--primary);text-decoration:none;cursor:pointer;}
+    .back{margin-top:18px;text-align:center;color:#aaa;font-size:.9rem;}
+    .back a{color:var(--primary);text-decoration:none;}
+    </style>
+  </head>
+  <body>
+    <div class="logo-h">
+        <img src="kj fitness.jpg" alt="KJ Fitness" onerror="this.style.display='none'">
+        <h1>KJ FITNESS</h1>
+    </div>div>
   <div class="box">
     <div class="tabs">
-      <button class="tab active" onclick="sw('login')">התחברות</button>
-      <button class="tab" onclick="sw('reg')">הרשמה</button>
-    </div>
+        <button class="tab active" onclick="sw('login')">התחברות</button>button>
+        <button class="tab" onclick="sw('reg')">הרשמה</button>button>
+    </div>div>
+  
+    <!-- LOGIN PANEL -->
     <div id="loginP" class="panel active">
-      <div class="fg"><label>שם משתמש</label><input id="lu" type="text" placeholder="שם משתמש" autocomplete="username"></div>
-      <div class="fg"><label>סיסמה</label><input id="lp" type="password" placeholder="סיסמה" autocomplete="current-password"></div>
-      <button class="btn" onclick="login()">התחבר/י</button>
-      <div id="lm" class="msg"></div>
-    </div>
+        <div class="fg"><label>אימייל</label><input id="lu" type="email" placeholder="your@email.com" autocomplete="email"></div>div>
+        <div class="fg">
+              <label>סיסמה</label>
+              <input id="lp" type="password" placeholder="סיסמה" autocomplete="current-password">
+              <div class="forgot"><a onclick="forgotPassword()">שכחת סיסמה?</a>a></div>div>
+        </div>div>
+        <button class="btn" onclick="loginEmail()">התחבר/י</button>button>
+        <div class="divider">או</div>div>
+        <button class="btn-google" onclick="loginGoogle()">
+              <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
+              המשך עם Google
+        </button>button>
+        <div id="lm" class="msg"></div>div>
+    </div>div>
+  
+    <!-- REGISTER PANEL -->
     <div id="regP" class="panel">
-      <div class="fg"><label>שם מלא</label><input id="rn" type="text" placeholder="השם שלך"></div>
-      <div class="fg"><label>שם משתמש</label><input id="ru" type="text" placeholder="בחר שם משתמש"></div>
-      <div class="fg"><label>סיסמה</label><input id="rp" type="password" placeholder="לפחות 6 תווים" autocomplete="new-password"></div>
-      <button class="btn" onclick="reg()">הרשמה</button>
-      <div id="rm" class="msg"></div>
-    </div>
-  </div>
-  <div class="back"><a href="index.html"><i class="fas fa-arrow-right"></i> חזרה לאתר</a></div>
-  <script>
-    (function(){
-      var users = JSON.parse(localStorage.getItem('kjUsers')||'[]');
-      if(!users.find(function(u){return u.username==='kj_coach';})){
-        users.push({username:'kj_coach',password:'coach123',name:"KJ המאמנת",role:'coach'});
-        localStorage.setItem('kjUsers',JSON.stringify(users));
+        <div class="fg"><label>שם מלא</label><input id="rn" type="text" placeholder="השם שלך"></div>div>
+        <div class="fg"><label>אימייל</label><input id="ru" type="email" placeholder="your@email.com" autocomplete="email"></div>div>
+        <div class="fg"><label>סיסמה</label><input id="rp" type="password" placeholder="לפחות 6 תווים" autocomplete="new-password"></div>div>
+        <button class="btn" onclick="registerEmail()">הרשמה</button>button>
+        <div class="divider">או</div>div>
+        <button class="btn-google" onclick="loginGoogle()">
+              <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
+              המשך עם Google
+        </button>button>
+        <div id="rm" class="msg"></div>div>
+    </div>div>
+  </div>div>
+  <div class="back"><a href="index.html"><i class="fas fa-arrow-right"></i>i> חזרה לאתר</a>a></div>div>
+  
+  <!-- Firebase -->
+  <script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+  import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, sendPasswordResetEmail, updateProfile } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+  import { getFirestore, doc, setDoc, getDoc } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+  
+  const COACH_EMAIL = 'pappostudios@gmail.com'; // <-- set the coach email here
+  
+  const firebaseConfig = {
+      apiKey: "AIzaSyBJDYiwXugrAaoOvoeuExHn_mMNgxN3Kpg",
+      authDomain: "kj-fitness-80723.firebaseapp.com",
+      projectId: "kj-fitness-80723",
+      storageBucket: "kj-fitness-80723.firebasestorage.app",
+      messagingSenderId: "525333297888",
+      appId: "1:525333297888:web:7246851d44b70d9904ee85"
+  };
+  
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+  
+  async function saveUserProfile(user, name) {
+      const role = user.email.toLowerCase() === COACH_EMAIL.toLowerCase() ? 'coach' : 'client';
+      await setDoc(doc(db, 'users', user.uid), {
+            uid: user.uid,
+            email: user.email,
+            name: name || user.displayName || user.email.split('@')[0],
+            role: role
+      }, { merge: true });
+      return role;
+  }
+  
+  async function redirectUser(user) {
+      const snap = await getDoc(doc(db, 'users', user.uid));
+      const role = snap.exists() ? snap.data().role : (user.email.toLowerCase() === COACH_EMAIL.toLowerCase() ? 'coach' : 'client');
+      window.location.href = role === 'coach' ? 'dashboard-coach.html' : 'dashboard-client.html';
+  }
+  
+  window.sw = function(t) {
+      document.getElementById('loginP').classList.toggle('active', t==='login');
+      document.getElementById('regP').classList.toggle('active', t==='reg');
+      document.querySelectorAll('.tab')[0].classList.toggle('active', t==='login');
+      document.querySelectorAll('.tab')[1].classList.toggle('active', t==='reg');
+  };
+  
+  window.loginEmail = async function() {
+      const email = document.getElementById('lu').value.trim();
+      const pass = document.getElementById('lp').value;
+      const m = document.getElementById('lm');
+      m.className = 'msg';
+      if (!email || !pass) { m.textContent = 'יש למלא אימייל וסיסמה'; m.className = 'msg err'; return; }
+      try {
+            const cred = await signInWithEmailAndPassword(auth, email, pass);
+            m.textContent = 'מתחבר/ת...'; m.className = 'msg ok';
+            await redirectUser(cred.user);
+      } catch(e) {
+            m.textContent = 'אימייל או סיסמה שגויים'; m.className = 'msg err';
       }
-    })();
-    function sw(t){
-      document.getElementById('loginP').classList.toggle('active',t==='login');
-      document.getElementById('regP').classList.toggle('active',t==='reg');
-      var tabs=document.querySelectorAll('.tab');
-      tabs[0].classList.toggle('active',t==='login');
-      tabs[1].classList.toggle('active',t==='reg');
-    }
-    function login(){
-      var u=document.getElementById('lu').value.trim();
-      var p=document.getElementById('lp').value;
-      var m=document.getElementById('lm');
-      m.className='msg';
-      if(!u||!p){m.textContent='יש למלא את כל השדות';m.className='msg err';return;}
-      var users=JSON.parse(localStorage.getItem('kjUsers')||'[]');
-      var found=users.find(function(x){return x.username===u&&x.password===p;});
-      if(!found){m.textContent='שם משתמש או סיסמה שגויים';m.className='msg err';return;}
-      localStorage.setItem('kjSession',JSON.stringify({username:found.username,name:found.name,role:found.role}));
-      m.textContent='מתחבר/ת...';m.className='msg ok';
-      setTimeout(function(){window.location.href=found.role==='coach'?'dashboard-coach.html':'dashboard-client.html';},700);
-    }
-    function reg(){
-      var n=document.getElementById('rn').value.trim();
-      var u=document.getElementById('ru').value.trim();
-      var p=document.getElementById('rp').value;
-      var m=document.getElementById('rm');
-      m.className='msg';
-      if(!n||!u||!p){m.textContent='יש למלא את כל השדות';m.className='msg err';return;}
-      if(p.length<6){m.textContent='הסיסמה חייבת להכיל לפחות 6 תווים';m.className='msg err';return;}
-      var users=JSON.parse(localStorage.getItem('kjUsers')||'[]');
-      if(users.find(function(x){return x.username===u;})){m.textContent='שם המשתמש כבר תפוס';m.className='msg err';return;}
-      users.push({username:u,password:p,name:n,role:'client'});
-      localStorage.setItem('kjUsers',JSON.stringify(users));
-      m.textContent='נרשמת בהצלחה! ניתן להתחבר';m.className='msg ok';
-      setTimeout(function(){sw('login');},1500);
-    }
+  };
+  
+  window.registerEmail = async function() {
+      const name = document.getElementById('rn').value.trim();
+      const email = document.getElementById('ru').value.trim();
+      const pass = document.getElementById('rp').value;
+      const m = document.getElementById('rm');
+      m.className = 'msg';
+      if (!name || !email || !pass) { m.textContent = 'יש למלא את כל השדות'; m.className = 'msg err'; return; }
+      if (pass.length < 6) { m.textContent = 'הסיסמה חייבת להכיל לפחות 6 תווים'; m.className = 'msg err'; return; }
+      try {
+            const cred = await createUserWithEmailAndPassword(auth, email, pass);
+            await updateProfile(cred.user, { displayName: name });
+            await saveUserProfile(cred.user, name);
+            m.textContent = 'נרשמת בהצלחה! מתחבר/ת...'; m.className = 'msg ok';
+            await redirectUser(cred.user);
+      } catch(e) {
+            if (e.code === 'auth/email-already-in-use') m.textContent = 'האימייל כבר רשום במערכת';
+                  else m.textContent = 'שגיאה בהרשמה: ' + e.message;
+            m.className = 'msg err';
+      }
+  };
+  
+  window.loginGoogle = async function() {
+      const provider = new GoogleAuthProvider();
+      try {
+            const cred = await signInWithPopup(auth, provider);
+            await saveUserProfile(cred.user, cred.user.displayName);
+            await redirectUser(cred.user);
+      } catch(e) {
+            if (e.code !== 'auth/popup-closed-by-user') {
+                    document.getElementById('lm').textContent = 'שגיאה בהתחברות עם Google';
+                    document.getElementById('lm').className = 'msg err';
+            }
+      }
+  };
+  
+  window.forgotPassword = async function() {
+      const email = document.getElementById('lu').value.trim();
+      const m = document.getElementById('lm');
+      if (!email) { m.textContent = 'הכנס/י אימייל בשדה למעלה'; m.className = 'msg err'; return; }
+      try {
+            await sendPasswordResetEmail(auth, email);
+            m.textContent = 'נשלח אימייל לאיפוס סיסמה!'; m.className = 'msg ok';
+      } catch(e) {
+            m.textContent = 'לא נמצא חשבון עם האימייל הזה'; m.className = 'msg err';
+      }
+  };
   </script>
-</body>
-</html>
+  </body>
+</html>html></label></label></h1>
+  </body>
+  </style></title>
+  </head>
