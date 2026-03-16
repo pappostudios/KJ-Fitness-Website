@@ -1,135 +1,1348 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KJ Fitness - הדרך שלך לגרסה הכי טובה של עצמך</title>
-  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <style>
-    :root{--primary-color:#00bcd4;--secondary-color:#1a1a1a;--text-color:#ffffff;--light-bg:#f4f4f4;--dark-text:#333333;}
-    *{margin:0;padding:0;box-sizing:border-box;font-family:'Heebo',sans-serif;}
-    body{background-color:var(--secondary-color);color:var(--text-color);line-height:1.6;}
-    a{text-decoration:none;color:inherit;}
-    header{display:flex;justify-content:space-between;align-items:center;padding:10px 5%;background-color:rgba(0,0,0,0.9);position:fixed;width:100%;top:0;z-index:1000;border-bottom:2px solid var(--primary-color);}
-    .logo img{height:50px;width:auto;vertical-align:middle;}
-    .nav-right{display:flex;align-items:center;gap:20px;}
-    nav ul{display:flex;list-style:none;gap:20px;}
-    nav a{font-weight:500;transition:color 0.3s;}
-    nav a:hover{color:var(--primary-color);}
-    .login-btn{background:transparent;border:2px solid var(--primary-color);color:var(--primary-color);padding:8px 20px;border-radius:50px;font-family:'Heebo',sans-serif;font-size:.95rem;font-weight:700;cursor:pointer;transition:all 0.3s;display:flex;align-items:center;gap:6px;text-decoration:none;}
-    .login-btn:hover{background:var(--primary-color);color:#fff;}
-    .hero{height:100vh;background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');background-size:cover;background-position:center;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:0 20px;margin-top:60px;}
-    .hero h1{font-size:3.5rem;margin-bottom:10px;text-shadow:2px 2px 4px rgba(0,0,0,0.5);text-transform:uppercase;}
-    .hero p{font-size:1.5rem;margin-bottom:30px;max-width:600px;}
-    .cta-button{background-color:#ffffff;color:var(--primary-color);padding:15px 30px;font-size:1.3rem;font-weight:700;border-radius:50px;border:2px solid var(--primary-color);transition:all 0.3s ease;display:inline-flex;align-items:center;gap:10px;}
-    .cta-button:hover{background-color:var(--primary-color);color:white;box-shadow:0 4px 15px rgba(0,188,212,0.4);transform:translateY(-3px);cursor:pointer;}
-    .section{padding:80px 10%;text-align:center;}
-    .section-title{font-size:2.5rem;margin-bottom:40px;position:relative;display:inline-block;}
-    .section-title::after{content:'';display:block;width:50%;height:4px;background:var(--primary-color);margin:10px auto 0;}
-    #about{background-color:var(--light-bg);color:var(--dark-text);}
-    #about .section-title{color:var(--secondary-color);}
-    .about-content{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:40px;text-align:right;}
-    .about-text{flex:1;min-width:300px;font-size:1.1rem;}
-    .about-image{flex:1;min-width:300px;max-width:400px;border-radius:10px;overflow:hidden;box-shadow:0 10px 20px rgba(0,0,0,0.2);}
-    .about-image img{width:100%;height:auto;display:block;}
-    #contact{background-color:var(--secondary-color);color:white;}
-    #contact .section-title{color:white;}
-    .contact-container{display:flex;justify-content:center;gap:30px;flex-wrap:wrap;margin-top:30px;}
-    .contact-item{background:rgba(255,255,255,0.1);padding:30px;border-radius:10px;width:250px;transition:transform 0.3s;}
-    .contact-item:hover{transform:translateY(-5px);background:rgba(255,255,255,0.15);}
-    .contact-item i{font-size:2rem;color:var(--primary-color);margin-bottom:15px;}
-    footer{background-color:black;color:#777;padding:20px;text-align:center;font-size:0.9rem;}
-    @media(max-width:768px){header{padding:15px;}.hero h1{font-size:2.5rem;}nav ul{gap:10px;font-size:0.9rem;}.cta-button{font-size:1.1rem;padding:12px 20px;}.login-btn{padding:7px 14px;font-size:.85rem;}}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KJ Fitness - מועצמים דרך תנועה</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Heebo:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  :root {
+    --dark-teal: #0d4f4f;
+    --bright-teal: #00c9b1;
+    --muted-teal: #3a7f7f;
+    --deep-green: #0a3d2e;
+    --light-aqua: #b2f0e8;
+    --neutral-grey: #8a9ba8;
+    --white: #ffffff;
+    --off-white: #f4f8f8;
+    --dark-bg: #071a18;
+    --card-bg: #0e2e2b;
+    --border-color: rgba(0,201,177,0.2);
+    --gradient-hero: linear-gradient(135deg, #071a18 0%, #0d4f4f 50%, #0a3d2e 100%);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Heebo', 'Montserrat', sans-serif;
+    background-color: var(--dark-bg);
+    color: var(--white);
+    line-height: 1.7;
+    direction: rtl;
+  }
+
+  a { text-decoration: none; color: inherit; }
+
+  /* ===== SCROLLBAR ===== */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--dark-bg); }
+  ::-webkit-scrollbar-thumb { background: var(--muted-teal); border-radius: 3px; }
+
+  /* ===== HEADER ===== */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 6%;
+    background-color: rgba(7,26,24,0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+  }
+
+  header.scrolled {
+    padding: 10px 6%;
+    background-color: rgba(7,26,24,0.99);
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo img {
+    height: 48px;
+    width: auto;
+    border-radius: 8px;
+    vertical-align: middle;
+  }
+
+  .logo-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: var(--bright-teal);
+    line-height: 1.1;
+  }
+
+  .logo-tagline {
+    font-size: 0.65rem;
+    font-weight: 400;
+    color: var(--neutral-grey);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: block;
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  nav ul {
+    display: flex;
+    list-style: none;
+    gap: 32px;
+  }
+
+  nav a {
+    font-weight: 500;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    color: rgba(255,255,255,0.85);
+    transition: color 0.3s;
+    position: relative;
+  }
+
+  nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    right: 0;
+    width: 0;
+    height: 2px;
+    background: var(--bright-teal);
+    transition: width 0.3s ease;
+  }
+
+  nav a:hover { color: var(--bright-teal); }
+  nav a:hover::after { width: 100%; }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--bright-teal), var(--muted-teal));
+    color: var(--dark-bg);
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-family: 'Heebo', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: none;
+    box-shadow: 0 4px 20px rgba(0,201,177,0.3);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,201,177,0.5);
+    filter: brightness(1.1);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--bright-teal);
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-family: 'Heebo', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 2px solid var(--bright-teal);
+  }
+
+  .btn-secondary:hover {
+    background: var(--bright-teal);
+    color: var(--dark-bg);
+    transform: translateY(-2px);
+  }
+
+  .login-btn {
+    background: transparent;
+    border: 1.5px solid rgba(0,201,177,0.5);
+    color: var(--bright-teal);
+    padding: 8px 18px;
+    border-radius: 50px;
+    font-family: 'Heebo', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+  }
+
+  .login-btn:hover {
+    background: var(--bright-teal);
+    color: var(--dark-bg);
+    border-color: var(--bright-teal);
+  }
+
+  /* ===== MOBILE MENU ===== */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--bright-teal);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(7,26,24,0.98);
+    z-index: 999;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .mobile-menu.active { display: flex; }
+
+  .mobile-menu nav ul {
+    flex-direction: column;
+    text-align: center;
+    gap: 24px;
+  }
+
+  .mobile-menu nav a {
+    font-size: 1.4rem;
+    font-weight: 700;
+  }
+
+  .mobile-close {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    background: transparent;
+    border: none;
+    color: var(--bright-teal);
+    font-size: 1.8rem;
+    cursor: pointer;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh;
+    background: var(--gradient-hero);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 120px 6% 80px;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: 
+      radial-gradient(ellipse at 20% 50%, rgba(0,201,177,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(10,61,46,0.4) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0,201,177,0.1);
+    border: 1px solid rgba(0,201,177,0.3);
+    border-radius: 50px;
+    padding: 6px 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--bright-teal);
+    margin-bottom: 28px;
+  }
+
+  .hero h1 {
+    font-family: 'Montserrat', 'Heebo', sans-serif;
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 12px;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+  }
+
+  .hero h1 .highlight {
+    background: linear-gradient(135deg, var(--bright-teal), var(--light-aqua));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-tagline {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    font-weight: 300;
+    color: var(--light-aqua);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .hero-desc {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: rgba(255,255,255,0.75);
+    max-width: 560px;
+    margin: 0 auto 48px;
+    line-height: 1.8;
+  }
+
+  .hero-cta-group {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .hero-cta-group .btn-primary {
+    padding: 16px 36px;
+    font-size: 1.05rem;
+    font-weight: 800;
+  }
+
+  .hero-cta-group .btn-secondary {
+    padding: 16px 36px;
+    font-size: 1.05rem;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 48px;
+    margin-top: 64px;
+    padding-top: 48px;
+    border-top: 1px solid var(--border-color);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .hero-stat {
+    text-align: center;
+  }
+
+  .hero-stat .number {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--bright-teal);
+    line-height: 1;
+  }
+
+  .hero-stat .label {
+    font-size: 0.8rem;
+    color: var(--neutral-grey);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* ===== SCROLL INDICATOR ===== */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--neutral-grey);
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    animation: bounce 2s infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-8px); }
+  }
+
+  /* ===== SECTIONS ===== */
+  .section {
+    padding: 100px 6%;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+
+  .section-label {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--bright-teal);
+    margin-bottom: 16px;
+    position: relative;
+  }
+
+  .section-label::before,
+  .section-label::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 30px;
+    height: 1px;
+    background: var(--bright-teal);
+  }
+
+  .section-label::before { right: calc(100% + 12px); }
+  .section-label::after { left: calc(100% + 12px); }
+
+  .section-title {
+    font-family: 'Montserrat', 'Heebo', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+
+  .section-subtitle {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.65);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+
+  /* ===== ABOUT ===== */
+  #about {
+    background: var(--off-white);
+    color: #1a1a1a;
+  }
+
+  #about .section-label { color: var(--dark-teal); }
+  #about .section-label::before, #about .section-label::after { background: var(--dark-teal); }
+  #about .section-title { color: var(--dark-bg); }
+  #about .section-subtitle { color: rgba(26,26,26,0.7); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 64px;
+    align-items: center;
+  }
+
+  .about-image-wrapper {
+    position: relative;
+  }
+
+  .about-image-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -16px;
+    right: -16px;
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--bright-teal);
+    border-radius: 16px;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  .about-image-wrapper img {
+    width: 100%;
+    height: 520px;
+    object-fit: cover;
+    border-radius: 12px;
+    position: relative;
+    z-index: 1;
+    display: block;
+  }
+
+  .about-badge {
+    position: absolute;
+    bottom: 24px;
+    left: -24px;
+    background: var(--dark-teal);
+    color: var(--white);
+    padding: 16px 24px;
+    border-radius: 12px;
+    z-index: 2;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+  }
+
+  .about-badge .badge-num {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--bright-teal);
+    line-height: 1;
+  }
+
+  .about-badge .badge-text {
+    font-size: 0.75rem;
+    color: var(--light-aqua);
+    letter-spacing: 1px;
+    margin-top: 2px;
+  }
+
+  .about-text-block h2 {
+    font-family: 'Montserrat', 'Heebo', sans-serif;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 800;
+    color: var(--dark-bg);
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .about-text-block p {
+    font-size: 1.02rem;
+    color: #3a3a3a;
+    line-height: 1.9;
+    margin-bottom: 16px;
+  }
+
+  .about-highlights {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 28px;
+  }
+
+  .highlight-tag {
+    background: rgba(13,79,79,0.1);
+    color: var(--dark-teal);
+    border: 1px solid rgba(13,79,79,0.25);
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  /* ===== KJ METHOD ===== */
+  #method {
+    background: var(--dark-bg);
+    position: relative;
+    overflow: hidden;
+  }
+
+  #method::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(0,201,177,0.05) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  .pillar-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 36px 28px;
+    text-align: center;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pillar-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--bright-teal), var(--light-aqua));
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s ease;
+  }
+
+  .pillar-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(0,201,177,0.4);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+
+  .pillar-card:hover::before { transform: scaleX(1); }
+
+  .pillar-icon {
+    width: 68px;
+    height: 68px;
+    background: rgba(0,201,177,0.1);
+    border: 1px solid rgba(0,201,177,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    font-size: 1.6rem;
+    color: var(--bright-teal);
+    transition: all 0.3s ease;
+  }
+
+  .pillar-card:hover .pillar-icon {
+    background: rgba(0,201,177,0.2);
+    transform: scale(1.1);
+  }
+
+  .pillar-card h3 {
+    font-family: 'Montserrat', 'Heebo', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--white);
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  .pillar-card p {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.7;
+  }
+
+  /* ===== SERVICES ===== */
+  #services {
+    background: linear-gradient(180deg, #081e1b 0%, #0a2a26 100%);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+
+  .service-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 40px 36px;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .service-card.featured {
+    background: linear-gradient(135deg, rgba(0,201,177,0.12), rgba(0,201,177,0.04));
+    border-color: rgba(0,201,177,0.4);
+  }
+
+  .service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+    border-color: rgba(0,201,177,0.5);
+  }
+
+  .service-icon-wrap {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--dark-teal), var(--muted-teal));
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    color: var(--bright-teal);
+    margin-bottom: 24px;
+    flex-shrink: 0;
+  }
+
+  .service-card.featured .service-icon-wrap {
+    background: linear-gradient(135deg, var(--bright-teal), var(--muted-teal));
+    color: var(--dark-bg);
+  }
+
+  .service-badge {
+    display: inline-block;
+    background: rgba(0,201,177,0.15);
+    color: var(--bright-teal);
+    border: 1px solid rgba(0,201,177,0.3);
+    border-radius: 50px;
+    padding: 3px 12px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .service-card h3 {
+    font-family: 'Montserrat', 'Heebo', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+
+  .service-card p {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.8;
+    flex-grow: 1;
+    margin-bottom: 20px;
+  }
+
+  .service-features {
+    list-style: none;
+    margin-bottom: 28px;
+  }
+
+  .service-features li {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.7);
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .service-features li::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--bright-teal);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .service-card .btn-primary,
+  .service-card .btn-secondary {
+    align-self: flex-start;
+    font-size: 0.88rem;
+    padding: 10px 22px;
+  }
+
+  /* ===== TESTIMONIAL / QUOTE ===== */
+  #quote {
+    background: linear-gradient(135deg, var(--dark-teal) 0%, var(--deep-green) 100%);
+    padding: 100px 6%;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #quote::before {
+    content: '"';
+    position: absolute;
+    top: -40px;
+    right: 5%;
+    font-size: 20rem;
+    color: rgba(0,201,177,0.06);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .quote-text {
+    font-family: 'Montserrat', 'Heebo', sans-serif;
+    font-size: clamp(1.3rem, 3vw, 2rem);
+    font-weight: 700;
+    color: var(--white);
+    max-width: 800px;
+    margin: 0 auto 28px;
+    line-height: 1.6;
+    font-style: italic;
+    position: relative;
+    z-index: 1;
+  }
+
+  .quote-author {
+    font-size: 0.9rem;
+    color: var(--light-aqua);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  /* ===== PROGRAMS ===== */
+  #programs {
+    background: var(--dark-bg);
+  }
+
+  .programs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .program-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 32px 28px;
+    transition: all 0.4s ease;
+    text-align: center;
+  }
+
+  .program-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(0,201,177,0.4);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+  }
+
+  .program-emoji {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .program-card h3 {
+    font-family: 'Montserrat', 'Heebo', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--bright-teal);
+    margin-bottom: 10px;
+  }
+
+  .program-card p {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.7;
+  }
+
+  /* ===== CONTACT / CTA ===== */
+  #contact {
+    background: linear-gradient(135deg, #071a18 0%, #0d3030 100%);
+    padding: 100px 6%;
+    text-align: center;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 900px;
+    margin: 48px auto 0;
+  }
+
+  .contact-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 32px 24px;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .contact-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(0,201,177,0.4);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+  }
+
+  .contact-card i {
+    font-size: 2rem;
+    color: var(--bright-teal);
+  }
+
+  .contact-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .contact-card p {
+    font-size: 0.85rem;
+    color: var(--neutral-grey);
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background-color: #030e0c;
+    color: rgba(255,255,255,0.4);
+    padding: 40px 6%;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .footer-logo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--bright-teal);
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 16px;
+  }
+
+  .footer-social a {
+    width: 40px;
+    height: 40px;
+    background: rgba(0,201,177,0.08);
+    border: 1px solid rgba(0,201,177,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--bright-teal);
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+  }
+
+  .footer-social a:hover {
+    background: var(--bright-teal);
+    color: var(--dark-bg);
+    transform: translateY(-2px);
+  }
+
+  .footer-copy {
+    font-size: 0.82rem;
+    text-align: center;
+    width: 100%;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.07);
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 1024px) {
+    .pillars-grid { grid-template-columns: repeat(2, 1fr); }
+    .programs-grid { grid-template-columns: repeat(2, 1fr); }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .about-image-wrapper { max-width: 480px; margin: 0 auto; }
+    .about-badge { left: 16px; }
+  }
+
+  @media (max-width: 768px) {
+    nav { display: none; }
+    .hamburger { display: flex; }
+    .hero-stats { gap: 24px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .pillars-grid { grid-template-columns: 1fr; }
+    .programs-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; max-width: 400px; }
+    .hero { padding: 100px 5% 60px; }
+    .section { padding: 72px 5%; }
+    .hero h1 { font-size: 2.4rem; }
+    .section-title { font-size: 1.8rem; }
+    header { padding: 14px 5%; }
+    .login-btn { display: none; }
+    .footer-inner { flex-direction: column; align-items: center; text-align: center; }
+  }
+
+  @media (max-width: 480px) {
+    .hero-cta-group { flex-direction: column; align-items: center; }
+    .hero-cta-group .btn-primary,
+    .hero-cta-group .btn-secondary { width: 100%; justify-content: center; }
+    .hero-stats { gap: 16px; }
+    .hero-stat .number { font-size: 1.8rem; }
+  }
+</style>
 </head>
 <body>
-  <header>
-    <div class="logo"><img src="kj fitness.jpg" alt="KJ FITNESS"></div>
-    <div class="nav-right">
-      <nav>
-        <ul>
-          <li><a href="#hero">ראשי</a></li>
-          <li><a href="#about">אודות</a></li>
-          <li><a href="#contact">צור קשר</a></li>
-        </ul>
-      </nav>
-      <a href="login.html" class="login-btn" id="loginNavBtn">
-        <i class="fas fa-user" id="loginIcon"></i>
-        <span id="loginBtnText">כניסה</span>
-      </a>
+<!-- ===== HEADER ===== -->
+<header id="main-header">
+  <div class="logo">
+    <img src="kj fitness.jpg" alt="KJ Fitness Logo">
+    <div>
+      <span class="logo-text">KJ FITNESS</span>
+      <span class="logo-tagline">Empowered Through Movement</span>
     </div>
-  </header>
-
-  <section id="hero" class="hero">
-    <h1>KJ FITNESS</h1>
-    <p>להגיע לתוצאות, להרגיש חזק/ה, ולהתאהב בתהליך.</p>
-    <a href="https://wa.me/972533985895?text=היי,%20אשמח%20לשמוע%20פרטים%20על%20אימונים%20ולתאם%20פגישה" class="cta-button" target="_blank">
-      <i class="fab fa-whatsapp"></i> להפוך לגרסה הכי טובה של עצמך
+  </div>
+  <div class="nav-right">
+    <nav>
+      <ul>
+        <li><a href="#hero">ראשי</a></li>
+        <li><a href="#about">אודות</a></li>
+        <li><a href="#method">השיטה</a></li>
+        <li><a href="#services">שירותים</a></li>
+        <li><a href="#programs">תוכניות</a></li>
+        <li><a href="#contact">צור קשר</a></li>
+      </ul>
+    </nav>
+    <a href="https://wa.me/972533985895?text=היי%20KJ,%20אשמח%20לשמוע%20על%20אימונים%20ולתאם%20ייעוץ%20ראשוני" class="btn-primary" target="_blank">
+      <i class="fab fa-whatsapp"></i> ייעוץ חינם
     </a>
-  </section>
+    <a href="login.html" class="login-btn" id="loginNavBtn">
+      <i class="fas fa-user" id="loginIcon"></i>
+      <span id="loginBtnText">כניסה</span>
+    </a>
+    <div class="hamburger" id="hamburgerBtn" onclick="document.getElementById('mobileMenu').classList.add('active')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
 
-  <section id="about" class="section">
-    <h2 class="section-title">קצת עליי</h2>
-    <div class="about-content">
-      <div class="about-image">
-        <img src="https://images.unsplash.com/photo-1594381898411-846e7d193883?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="KJ Fitness Trainer">
-      </div>
-      <div class="about-text">
-        <h3>היי, קוראים לי ג'מה ואני המאמנת שלך</h3>
-        <p>everything u want people to know about you</p>
-        <br>
-        <p>another section for the same thing</p>
+<!-- ===== MOBILE MENU ===== -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="document.getElementById('mobileMenu').classList.remove('active')">
+    <i class="fas fa-times"></i>
+  </button>
+  <nav>
+    <ul>
+      <li><a href="#hero" onclick="document.getElementById('mobileMenu').classList.remove('active')">ראשי</a></li>
+      <li><a href="#about" onclick="document.getElementById('mobileMenu').classList.remove('active')">אודות</a></li>
+      <li><a href="#method" onclick="document.getElementById('mobileMenu').classList.remove('active')">השיטה</a></li>
+      <li><a href="#services" onclick="document.getElementById('mobileMenu').classList.remove('active')">שירותים</a></li>
+      <li><a href="#programs" onclick="document.getElementById('mobileMenu').classList.remove('active')">תוכניות</a></li>
+      <li><a href="#contact" onclick="document.getElementById('mobileMenu').classList.remove('active')">צור קשר</a></li>
+    </ul>
+  </nav>
+  <a href="https://wa.me/972533985895?text=היי%20KJ,%20אשמח%20לשמוע%20על%20אימונים%20ולתאם%20ייעוץ%20ראשוני" class="btn-primary" target="_blank">
+    <i class="fab fa-whatsapp"></i> ייעוץ חינם
+  </a>
+</div>
+
+<!-- ===== HERO ===== -->
+<section id="hero" class="hero">
+  <span class="hero-badge">
+    <i class="fas fa-bolt"></i> KJ FITNESS — תל אביב
+  </span>
+  <h1>מועצמים<br><span class="highlight">דרך תנועה</span></h1>
+  <p class="hero-tagline">Empowered Through Movement</p>
+  <p class="hero-desc">כוח אמיתי הוא לא רק שרירים — הוא ביטחון עצמי, חיוניות, ועמידות נפשית. בואו נבנה אותו יחד.</p>
+  <div class="hero-cta-group">
+    <a href="https://wa.me/972533985895?text=היי%20KJ,%20אשמח%20לשמוע%20על%20אימונים%20ולתאם%20ייעוץ%20ראשוני" class="btn-primary" target="_blank">
+      <i class="fab fa-whatsapp"></i> לייעוץ ראשוני חינם
+    </a>
+    <a href="#about" class="btn-secondary">
+      <i class="fas fa-arrow-down"></i> קראו עליי
+    </a>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="number">+8</div>
+      <div class="label">שנות ניסיון</div>
+    </div>
+    <div class="hero-stat">
+      <div class="number">100+</div>
+      <div class="label">מתאמנים</div>
+    </div>
+    <div class="hero-stat">
+      <div class="number">3</div>
+      <div class="label">סגנונות אימון</div>
+    </div>
+    <div class="hero-stat">
+      <div class="number">∞</div>
+      <div class="label">מוטיבציה</div>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <i class="fas fa-chevron-down"></i>
+    <span>גלול למטה</span>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section id="about" class="section">
+  <div class="section-header">
+    <span class="section-label">אודות KJ</span>
+    <h2 class="section-title">מי היא קירסטן — KJ?</h2>
+  </div>
+  <div class="about-grid">
+    <div class="about-image-wrapper">
+      <img src="kj fitness.jpg" alt="Kirsten KJ Chananie - Fitness Coach">
+      <div class="about-badge">
+        <div class="badge-num">8+</div>
+        <div class="badge-text">שנות ניסיון</div>
       </div>
     </div>
-  </section>
-
-  <section id="contact" class="section">
-    <h2 class="section-title">בוא/י נדבר</h2>
-    <p>מוכן/ה להתחיל? יש לך שאלות? אני זמינה לכל דבר.</p>
-    <div class="contact-container">
-      <a href="https://wa.me/972533985895" target="_blank" class="contact-item">
-        <i class="fab fa-whatsapp"></i>
-        <h3>וואטסאפ</h3>
-        <p>שלח/י הודעה לתיאום</p>
-      </a>
-      <a href="https://www.instagram.com/kj__fitness__/" target="_blank" class="contact-item">
-        <i class="fab fa-instagram"></i>
-        <h3>אינסטגרם</h3>
-        <p>עקוב/י אחרי באינסטגרם</p>
-      </a>
-      <div class="contact-item">
-        <i class="fas fa-map-marker-alt"></i>
-        <h3>מיקום</h3>
-        <p>איפה שתרצו</p>
+    <div class="about-text-block">
+      <h2>כוח הוא לא רק פיזי — הוא אורח חיים.</h2>
+      <p>שמי קירסטן שניאני, ומכולם אני מוכרת בשם KJ. הדרך שלי לעולם הכושר התחילה בספורט קרבי — סביבה שבה למדתי מה זה כוח אמיתי, מנטליות של לוחם/ת, ועבודה קשה שמניבה תוצאות.</p>
+      <p>עם השנים עברתי דרך עולם ה-CrossFit ועבודת הכוח ברמה גבוהה, וגיליתי שיטה שמשלבת בין אימוני כוח פונקציונליים, תנועה איכותית ועקביות — שלושה מרכיבים שיוצרים שינוי ארוך טווח, לא רק "לפני ואחרי".</p>
+      <p>האמונה שלי פשוטה: <strong>כל אחד מסוגל להיות גרסה חזקה, בריאה ומחוברת יותר של עצמו</strong>. הכוח לא מגיע מהפחד — הוא מגיע מביטחון עצמי, מאהבה לתהליך ומידיעה שכל צעד קדימה סופר.</p>
+      <div class="about-highlights">
+        <span class="highlight-tag">🥊 ספורט קרבי</span>
+        <span class="highlight-tag">🏋️ CrossFit Level 2</span>
+        <span class="highlight-tag">💪 אימוני כוח ברמה גבוהה</span>
+        <span class="highlight-tag">🌿 אריכות ימים ובריאות</span>
+        <span class="highlight-tag">🎯 מאמנת מוסמכת</span>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <footer>
-    <p>&copy; 2026 KJ Fitness. כל הזכויות שמורות.</p>
-  </footer>
+<!-- ===== METHOD ===== -->
+<section id="method" class="section">
+  <div class="section-header">
+    <span class="section-label">שיטת KJ Strength</span>
+    <h2 class="section-title">4 עמודי התווך של השיטה</h2>
+    <p class="section-subtitle">הגישה שלי לאימון מבוססת על ארבעה עקרונות שיוצרים שינוי מלא ומתמשך — לא רק בגוף, אלא בחיים.</p>
+  </div>
+  <div class="pillars-grid">
+    <div class="pillar-card">
+      <div class="pillar-icon"><i class="fas fa-dumbbell"></i></div>
+      <h3>כוח — Strength</h3>
+      <p>בניית בסיס כוח פונקציונלי ואמיתי. לא אסתטי בלבד — כוח שמשרת אתכם בחיי היומיום, בספורט, ולאורך שנים.</p>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-icon"><i class="fas fa-heart-pulse"></i></div>
+      <h3>אריכות ימים — Longevity</h3>
+      <p>אימון חכם שמשמר את הגוף לטווח ארוך. מניעת פציעות, שמירה על ניידות, ויצירת הרגלים שישמרו אתכם פעילים ל-20 שנה קדימה.</p>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-icon"><i class="fas fa-person-running"></i></div>
+      <h3>איכות תנועה — Movement Quality</h3>
+      <p>הטכניקה קודמת לכל. תנועה נכונה, מדויקת ובטוחה היא הבסיס שעליו נבנה הכל — יעילות, כוח ובטיחות.</p>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-icon"><i class="fas fa-calendar-check"></i></div>
+      <h3>עקביות — Consistency</h3>
+      <p>אין קיצורי דרך. הסוד האמיתי הוא להגיע, שוב ושוב. אנחנו בונים מערכות ושגרות שהופכות את האימון לחלק טבעי מהחיים שלכם.</p>
+    </div>
+  </div>
+</section>
 
-  <script type="module">
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
-import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
-const COACH_EMAILS = ['pappostudios@gmail.com', 'kjfitness.info@gmail.com'];
-const firebaseConfig = { apiKey: "AIzaSyBJDYiwXugrAaoOvoeuExHn_mMNgxN3Kpg", authDomain: "kj-fitness-80723.firebaseapp.com", projectId: "kj-fitness-80723", storageBucket: "kj-fitness-80723.firebasestorage.app", messagingSenderId: "525333297888", appId: "1:525333297888:web:7246851d44b70d9904ee85" };
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-onAuthStateChanged(auth, async function(user) {
-  if (user) {
-    const snap = await getDoc(doc(db, 'users', user.uid));
-    const name = snap.exists() ? snap.data().name : user.displayName || user.email.split('@')[0];
-    const role = snap.exists() ? snap.data().role : (COACH_EMAILS.includes(user.email.toLowerCase()) ? 'coach' : 'client');
-    const btn = document.getElementById('loginNavBtn');
-    document.getElementById('loginBtnText').textContent = name;
-    document.getElementById('loginIcon').className = 'fas fa-tachometer-alt';
-    btn.href = role === 'coach' ? 'dashboard-coach.html' : 'dashboard-client.html';
-  }
-});
+<!-- ===== QUOTE ===== -->
+<section id="quote">
+  <p class="quote-text">"כוח אמיתי בא מביטחון עצמי, מעמידות נפשית ומהידיעה שאתה מסוגל — לא מהפחד ממה שתהיה אם לא תתאמן."</p>
+  <p class="quote-author">— KJ, מייסדת KJ Fitness</p>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section id="services" class="section">
+  <div class="section-header">
+    <span class="section-label">שירותים</span>
+    <h2 class="section-title">בחרו את הדרך שלכם</h2>
+    <p class="section-subtitle">כל מסלול מותאם אישית לרמה, למטרות ולאורח החיים שלכם — עם ליווי מקצועי בכל שלב.</p>
+  </div>
+  <div class="services-grid">
+
+    <div class="service-card featured">
+      <div class="service-icon-wrap"><i class="fas fa-user-check"></i></div>
+      <span class="service-badge">⭐ פופולרי</span>
+      <h3>אימון אישי — 1 על 1</h3>
+      <p>האימון הכי ממוקד שיש. נבנה יחד תוכנית מותאמת לגוף שלכם, נעבוד על טכניקה מושלמת ונחשוף את הפוטנציאל האמיתי שלכם.</p>
+      <ul class="service-features">
+        <li>תוכנית אישית מלאה</li>
+        <li>ליווי טכניקה ומניעת פציעות</li>
+        <li>מעקב והתאמה שוטפת</li>
+        <li>זמינות מלאה בין אימונים</li>
+      </ul>
+      <a href="https://wa.me/972533985895?text=היי%20KJ,%20אני%20מעוניין/ת%20באימון%20אישי%201%20על%201" class="btn-primary" target="_blank">
+        <i class="fab fa-whatsapp"></i> לתיאום ייעוץ
+      </a>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon-wrap"><i class="fas fa-laptop"></i></div>
+      <h3>אימון היברידי — Online + Offline</h3>
+      <p>תוכנית חודשית מותאמת אישית עם משוב וידאו על הטכניקה. מושלם למי שמחפש גמישות מבלי לוותר על איכות האימון.</p>
+      <ul class="service-features">
+        <li>תוכנית חודשית מפורטת</li>
+        <li>משוב וידאו על הטכניקה</li>
+        <li>מעקב התקדמות שבועי</li>
+        <li>תמיכה דיגיטלית מלאה</li>
+      </ul>
+      <a href="https://wa.me/972533985895?text=היי%20KJ,%20אני%20מעוניין/ת%20באימון%20היברידי" class="btn-primary" target="_blank">
+        <i class="fab fa-whatsapp"></i> לפרטים נוספים
+      </a>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon-wrap"><i class="fas fa-users"></i></div>
+      <h3>אימון קבוצתי בחוץ</h3>
+      <p>אנרגיה של קבוצה, תוצאות של אימון אישי. שני סשנים קבועים בשבוע שמשלבים כוח, התנייה ואווירה בלתי ייאמן.</p>
+      <ul class="service-features">
+        <li>🌿 ימי שלישי — Strength in the Park</li>
+        <li>🌊 ימי שישי — Beach Conditioning</li>
+        <li>מקסימום 10 משתתפים</li>
+        <li>מתאים לכל רמות הכושר</li>
+      </ul>
+      <a href="https://wa.me/972533985895?text=היי%20KJ,%20אני%20מעוניין/ת%20להצטרף%20לאימון%20קבוצתי" class="btn-primary" target="_blank">
+        <i class="fab fa-whatsapp"></i> להצטרפות
+      </a>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon-wrap"><i class="fas fa-clipboard-list"></i></div>
+      <h3>תוכניות אימון מוכנות</h3>
+      <p>תוכניות מוכנות מראש, שעוצבו בקפידה עבור מטרות ספציפיות. גמישות מלאה — מתאמנים מתי ואיפה שנוח לכם.</p>
+      <ul class="service-features">
+        <li>CrossFit Foundations</li>
+        <li>Kettlebell Strength & Power</li>
+        <li>Longevity Strength (40+)</li>
+      </ul>
+      <a href="https://wa.me/972533985895?text=היי%20KJ,%20אני%20מעוניין/ת%20בתוכנית%20אימון%20מוכנה" class="btn-primary" target="_blank">
+        <i class="fab fa-whatsapp"></i> לבחירת תוכנית
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== PROGRAMS ===== -->
+<section id="programs" class="section">
+  <div class="section-header">
+    <span class="section-label">תוכניות אימון</span>
+    <h2 class="section-title">תוכניות KJ Fitness</h2>
+    <p class="section-subtitle">מגוון תוכניות שנבנו עם ידע, ניסיון ואהבה — לכל מטרה ולכל שלב בדרך.</p>
+  </div>
+  <div class="programs-grid">
+    <div class="program-card">
+      <span class="program-emoji">🔥</span>
+      <h3>CrossFit Foundations</h3>
+      <p>תוכנית לבנות בסיס כוח ואירובי חזק. מושלמת לתחילת דרך ולמי שרוצה להיכנס לעולם ה-CrossFit בצורה נכונה ובטוחה.</p>
+    </div>
+    <div class="program-card">
+      <span class="program-emoji">🔔</span>
+      <h3>Kettlebell Strength & Power</h3>
+      <p>הכוח הכי פונקציונלי שיש — עם קטלבל. תוכנית שתשדרג את הכוח, היציבה והקואורדינציה שלכם מהאימון הראשון.</p>
+    </div>
+    <div class="program-card">
+      <span class="program-emoji">🌿</span>
+      <h3>Longevity Strength (40+)</h3>
+      <p>תוכנית כוח חכמה לגיל הבוגר — שמירה על ניידות, מניעת פציעות ובניית כוח ארוך טווח. הגיל לא עוצר כלום.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact">
+  <div class="section-header">
+    <span class="section-label">צור קשר</span>
+    <h2 class="section-title">מוכנים להתחיל?</h2>
+    <p class="section-subtitle">צרו קשר עכשיו לייעוץ ראשוני חינם — נדבר, נכיר ונבנה יחד את התוכנית המושלמת עבורכם.</p>
+  </div>
+  <div class="contact-grid">
+    <a href="https://wa.me/972533985895?text=היי%20KJ,%20אשמח%20לשמוע%20על%20אימונים%20ולתאם%20ייעוץ%20ראשוני" target="_blank" class="contact-card">
+      <i class="fab fa-whatsapp"></i>
+      <h3>WhatsApp</h3>
+      <p>0533-985-895</p>
+      <p>שלחו הודעה ונחזור אליכם מיד</p>
+    </a>
+    <a href="https://www.instagram.com/kj__fitness__/" target="_blank" class="contact-card">
+      <i class="fab fa-instagram"></i>
+      <h3>Instagram</h3>
+      <p>@kj__fitness__</p>
+      <p>עקבו אחרינו לתוכן יומיומי</p>
+    </a>
+    <a href="https://www.facebook.com/kjfitness" target="_blank" class="contact-card">
+      <i class="fab fa-facebook"></i>
+      <h3>Facebook</h3>
+      <p>KJ Fitness</p>
+      <p>הצטרפו לקהילה שלנו</p>
+    </a>
+  </div>
+  <div style="text-align:center; margin-top: 52px;">
+    <a href="https://wa.me/972533985895?text=היי%20KJ,%20אשמח%20לשמוע%20על%20אימונים%20ולתאם%20ייעוץ%20ראשוני" class="btn-primary" target="_blank" style="font-size:1.1rem; padding: 18px 48px;">
+      <i class="fab fa-whatsapp"></i> שלחו הודעה עכשיו
+    </a>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">KJ FITNESS</div>
+      <div style="font-size:0.75rem; margin-top:4px; letter-spacing:2px; color:var(--neutral-grey);">EMPOWERED THROUGH MOVEMENT</div>
+    </div>
+    <div class="footer-social">
+      <a href="https://www.instagram.com/kj__fitness__/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.facebook.com/kjfitness" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://wa.me/972533985895" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    </div>
+  </div>
+  <p class="footer-copy">&copy; 2026 KJ Fitness. כל הזכויות שמורות. | עוצב ונבנה עם ❤️ עבור קירסטן KJ שניאני</p>
+</footer>
+
+<script>
+  // Header scroll effect
+  window.addEventListener('scroll', () => {
+    const header = document.getElementById('main-header');
+    if (window.scrollY > 60) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  });
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+  import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+  import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+  const COACH_EMAILS = ['pappostudios@gmail.com', 'kjfitness.info@gmail.com'];
+  const firebaseConfig = {
+    apiKey: "AIzaSyBJDYiwXugrAaoOvoeuExHn_mMNgxN3Kpg",
+    authDomain: "kj-fitness-80723.firebaseapp.com",
+    projectId: "kj-fitness-80723",
+    storageBucket: "kj-fitness-80723.firebasestorage.app",
+    messagingSenderId: "525333297888",
+    appId: "1:525333297888:web:7246851d44b70d9904ee85"
+  };
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+  onAuthStateChanged(auth, async function(user) {
+    if (user) {
+      const snap = await getDoc(doc(db, 'users', user.uid));
+      const name = snap.exists() ? snap.data().name : user.displayName || user.email.split('@')[0];
+      const role = snap.exists() ? snap.data().role : (COACH_EMAILS.includes(user.email.toLowerCase()) ? 'coach' : 'client');
+      const btn = document.getElementById('loginNavBtn');
+      document.getElementById('loginBtnText').textContent = name;
+      document.getElementById('loginIcon').className = 'fas fa-tachometer-alt';
+      btn.href = role === 'coach' ? 'dashboard-coach.html' : 'dashboard-client.html';
+    }
+  });
 </script>
 </body>
 </html>
