@@ -125,6 +125,7 @@
     });
 
     window.logout = async function() {
+            sessionStorage.setItem('justLoggedOut', '1');
       await signOut(auth);
       window.location.href = 'index.html';
     };
