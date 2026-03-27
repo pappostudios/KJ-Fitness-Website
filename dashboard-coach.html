@@ -64,16 +64,19 @@
       <button class="logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> יציאה</button>
     </div>
   </header>
+
   <div class="main">
     <div class="tabs-nav">
       <button class="tnav active" onclick="showTab('schedule',event)"><i class="fas fa-calendar-alt"></i> ניהול לוח זמנים</button>
       <button class="tnav" onclick="showTab('clients',event)"><i class="fas fa-users"></i> לקוחות והודעות</button>
     </div>
+
     <div id="tab-schedule" class="tab-content active">
       <h2>לוח זמנים שבועי</h2>
       <p style="color:#aaa;margin-bottom:20px;font-size:.95rem;">הוסיפי שעות פנויות לכל יום. הלקוחות יוכלו לראות את הזמינות שלך.</p>
       <div class="week-grid" id="weekGrid"></div>
     </div>
+
     <div id="tab-clients" class="tab-content">
       <h2>לקוחות והודעות</h2>
       <div id="clientList" class="client-list"></div>
@@ -112,9 +115,7 @@
       const snap = await getDoc(doc(db, 'schedule', 'weekly'));
       return snap.exists() ? snap.data() : {};
     }
-    async function saveSchedule(s) {
-      await setDoc(doc(db, 'schedule', 'weekly'), s);
-    }
+    async function saveSchedule(s) { await setDoc(doc(db, 'schedule', 'weekly'), s); }
     async function getClients() {
       const q = query(collection(db, 'users'), where('role', '==', 'client'));
       const snap = await getDocs(q);
@@ -138,6 +139,7 @@
     });
 
     window.logout = async function() {
+      sessionStorage.setItem('justLoggedOut', '1');
       await signOut(auth);
       window.location.href = 'index.html';
     };
@@ -212,13 +214,12 @@
           +'<div class="msg-thread" id="thr-'+u.uid+'">'+threadHtml+'</div>'
           +'<div class="msg-compose"><input id="ci-'+u.uid+'" type="text" placeholder="כתבי הודעה ללקוח..."><button onclick="sendTo(''+u.uid+'')"><i class="fas fa-paper-plane"></i></button></div>';
         container.appendChild(card);
-        // Mark unread messages as read
         for (var m of thread) {
           if (m.from === 'client' && !m.readByCoach) {
             await updateDoc(doc(db, 'messages', m.id), { readByCoach: true });
           }
         }
-        setTimeout((uid => () => { var t = document.getElementById('thr-'+uid); if(t) t.scrollTop = t.scrollHeight; })(u.uid), 50);
+        setTimeout(((uid) => () => { var t = document.getElementById('thr-'+uid); if(t) t.scrollTop = t.scrollHeight; })(u.uid), 50);
       }
     }
 
