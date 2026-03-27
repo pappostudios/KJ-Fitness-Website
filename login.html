@@ -100,9 +100,14 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
 
-    // Auto-redirect if already logged in
+    // Auto-redirect if already logged in — but NOT if the user just signed out
+    const justLoggedOut = sessionStorage.getItem('justLoggedOut');
+    if (justLoggedOut) {
+      sessionStorage.removeItem('justLoggedOut');
+    }
+
     onAuthStateChanged(auth, async (user) => {
-      if (user) {
+      if (user && !justLoggedOut) {
         await redirectUser(user);
       }
     });
