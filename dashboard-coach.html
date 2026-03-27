@@ -70,13 +70,11 @@
       <button class="tnav active" onclick="showTab('schedule',event)"><i class="fas fa-calendar-alt"></i> ניהול לוח זמנים</button>
       <button class="tnav" onclick="showTab('clients',event)"><i class="fas fa-users"></i> לקוחות והודעות</button>
     </div>
-
     <div id="tab-schedule" class="tab-content active">
       <h2>לוח זמנים שבועי</h2>
       <p style="color:#aaa;margin-bottom:20px;font-size:.95rem;">הוסיפי שעות פנויות לכל יום. הלקוחות יוכלו לראות את הזמינות שלך.</p>
       <div class="week-grid" id="weekGrid"></div>
     </div>
-
     <div id="tab-clients" class="tab-content">
       <h2>לקוחות והודעות</h2>
       <div id="clientList" class="client-list"></div>
@@ -105,22 +103,27 @@
     const db = getFirestore(app);
 
     const DAYS = ['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'];
-    var HOURS = [];
-    for (var h = 6; h <= 22; h++) {
-      HOURS.push((h<10?'0':'')+h+':00');
-      HOURS.push((h<10?'0':'')+h+':30');
+    const HOURS = [];
+    for (let h = 6; h <= 22; h++) {
+      HOURS.push((h < 10 ? '0' : '') + h + ':00');
+      HOURS.push((h < 10 ? '0' : '') + h + ':30');
     }
 
     async function getSchedule() {
       const snap = await getDoc(doc(db, 'schedule', 'weekly'));
       return snap.exists() ? snap.data() : {};
     }
-    async function saveSchedule(s) { await setDoc(doc(db, 'schedule', 'weekly'), s); }
+
+    async function saveSchedule(s) {
+      await setDoc(doc(db, 'schedule', 'weekly'), s);
+    }
+
     async function getClients() {
       const q = query(collection(db, 'users'), where('role', '==', 'client'));
       const snap = await getDocs(q);
       return snap.docs.map(d => d.data());
     }
+
     async function getMessages(clientUid) {
       const q = query(collection(db, 'messages'), where('clientUid', '==', clientUid), orderBy('timestamp', 'asc'));
       const snap = await getDocs(q);
@@ -147,34 +150,44 @@
     window.showTab = function(t, e) {
       document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
       document.querySelectorAll('.tnav').forEach(el => el.classList.remove('active'));
-      document.getElementById('tab-'+t).classList.add('active');
+      document.getElementById('tab-' + t).classList.add('active');
       if (e && e.currentTarget) e.currentTarget.classList.add('active');
       if (t === 'clients') renderClients();
     };
 
     async function renderSchedule() {
-      var sched = await getSchedule();
-      var grid = document.getElementById('weekGrid');
+      const sched = await getSchedule();
+      const grid = document.getElementById('weekGrid');
       grid.innerHTML = '';
       DAYS.forEach(function(day) {
-        var slots = sched[day] || [];
-        var slotHtml = slots.length
-          ? slots.map((slot,i) => '<div class="slot"><span>'+slot+'</span><button class="del-slot" onclick="delSlot(''+day+'','+i+')"><i class="fas fa-times"></i></button></div>').join('')
+        const slots = sched[day] || [];
+        const slotHtml = slots.length
+          ? slots.map((slot, i) => {
+              return '<div class="slot"><span>' + slot + '</span>'
+                + '<button class="del-slot" onclick="window.delSlot(this)" data-day="' + day + '" data-idx="' + i + '">'
+                + '<i class="fas fa-times"></i></button></div>';
+            }).join('')
           : '<span style="color:#555;font-size:.8rem">אין שעות</span>';
-        var optHtml = HOURS.map(h => '<option>'+h+'</option>').join('');
-        var card = document.createElement('div');
+        const optHtml = HOURS.map(h => '<option>' + h + '</option>').join('');
+        const card = document.createElement('div');
         card.className = 'day-card';
-        card.innerHTML = '<h4>'+day+'</h4><div class="slot-list">'+slotHtml+'</div><div class="add-slot-row"><select id="sel-'+day+'">'+optHtml+'</select><button onclick="addSlot(''+day+'')">הוסף</button></div>';
+        card.innerHTML = '<h4>' + day + '</h4>'
+          + '<div class="slot-list">' + slotHtml + '</div>'
+          + '<div class="add-slot-row">'
+          + '<select id="sel-' + day + '">' + optHtml + '</select>'
+          + '<button onclick="window.addSlot(this)" data-day="' + day + '">הוסף</button>'
+          + '</div>';
         grid.appendChild(card);
       });
     }
 
-    window.addSlot = async function(day) {
-      var sel = document.getElementById('sel-'+day);
-      var time = sel.value;
-      var sched = await getSchedule();
+    window.addSlot = async function(btn) {
+      const day = btn.getAttribute('data-day');
+      const sel = document.getElementById('sel-' + day);
+      const time = sel.value;
+      const sched = await getSchedule();
       if (!sched[day]) sched[day] = [];
-      if (sched[day].indexOf(time) === -1) {
+      if (!sched[day].includes(time)) {
         sched[day].push(time);
         sched[day].sort();
         await saveSchedule(sched);
@@ -182,50 +195,63 @@
       }
     };
 
-    window.delSlot = async function(day, idx) {
-      var sched = await getSchedule();
+    window.delSlot = async function(btn) {
+      const day = btn.getAttribute('data-day');
+      const idx = parseInt(btn.getAttribute('data-idx'));
+      const sched = await getSchedule();
       if (sched[day]) sched[day].splice(idx, 1);
       await saveSchedule(sched);
       await renderSchedule();
     };
 
     async function renderClients() {
-      var clients = await getClients();
-      var container = document.getElementById('clientList');
+      const clients = await getClients();
+      const container = document.getElementById('clientList');
       if (!clients.length) {
         container.innerHTML = '<div class="empty-state"><i class="fas fa-user-slash" style="font-size:2rem;color:#555;display:block;margin-bottom:12px"></i>אין לקוחות רשומים עדיין</div>';
         return;
       }
       container.innerHTML = '';
-      for (var u of clients) {
-        var thread = await getMessages(u.uid);
-        var unread = thread.filter(m => m.from === 'client' && !m.readByCoach).length;
-        var threadHtml = thread.length
+      for (const u of clients) {
+        const thread = await getMessages(u.uid);
+        const unread = thread.filter(m => m.from === 'client' && !m.readByCoach).length;
+        const threadHtml = thread.length
           ? thread.map(m => {
-              var ic = m.from === 'coach';
-              var time = m.timestamp ? new Date(m.timestamp).toLocaleString('he-IL',{hour:'2-digit',minute:'2-digit',day:'2-digit',month:'2-digit'}) : '';
-              return '<div class="msg-bubble '+(ic?'coach':'client')+'">'+m.text+'<div class="msg-meta">'+(ic?'מאמנת':'לקוח/ה')+' &bull; '+time+'</div></div>';
+              const ic = m.from === 'coach';
+              const time = m.timestamp ? new Date(m.timestamp).toLocaleString('he-IL', {hour:'2-digit',minute:'2-digit',day:'2-digit',month:'2-digit'}) : '';
+              return '<div class="msg-bubble ' + (ic ? 'coach' : 'client') + '">' + m.text
+                + '<div class="msg-meta">' + (ic ? 'מאמנת' : 'לקוח/ה') + ' &bull; ' + time + '</div></div>';
             }).join('')
           : '<div style="color:#555;font-size:.85rem;text-align:center;padding:8px">אין הודעות</div>';
-        var card = document.createElement('div');
+
+        const card = document.createElement('div');
         card.className = 'client-card';
-        card.innerHTML = '<h4>'+u.name+(unread?'&nbsp;<span class="badge">'+unread+' חדש</span>':'')+'</h4>'
-          +'<div class="useremail">'+u.email+'</div>'
-          +'<div class="msg-thread" id="thr-'+u.uid+'">'+threadHtml+'</div>'
-          +'<div class="msg-compose"><input id="ci-'+u.uid+'" type="text" placeholder="כתבי הודעה ללקוח..."><button onclick="sendTo(''+u.uid+'')"><i class="fas fa-paper-plane"></i></button></div>';
+        card.dataset.uid = u.uid;
+        card.innerHTML = '<h4>' + u.name + (unread ? '&nbsp;<span class="badge">' + unread + ' חדש</span>' : '') + '</h4>'
+          + '<div class="useremail">' + u.email + '</div>'
+          + '<div class="msg-thread" id="thr-' + u.uid + '">' + threadHtml + '</div>'
+          + '<div class="msg-compose">'
+          + '<input id="ci-' + u.uid + '" type="text" placeholder="כתבי הודעה ללקוח...">'
+          + '<button onclick="window.sendTo(this)" data-uid="' + u.uid + '"><i class="fas fa-paper-plane"></i></button>'
+          + '</div>';
         container.appendChild(card);
-        for (var m of thread) {
+
+        for (const m of thread) {
           if (m.from === 'client' && !m.readByCoach) {
             await updateDoc(doc(db, 'messages', m.id), { readByCoach: true });
           }
         }
-        setTimeout(((uid) => () => { var t = document.getElementById('thr-'+uid); if(t) t.scrollTop = t.scrollHeight; })(u.uid), 50);
+        setTimeout(((uid) => () => {
+          const t = document.getElementById('thr-' + uid);
+          if (t) t.scrollTop = t.scrollHeight;
+        })(u.uid), 50);
       }
     }
 
-    window.sendTo = async function(clientUid) {
-      var input = document.getElementById('ci-'+clientUid);
-      var text = input.value.trim();
+    window.sendTo = async function(btn) {
+      const clientUid = btn.getAttribute('data-uid');
+      const input = document.getElementById('ci-' + clientUid);
+      const text = input.value.trim();
       if (!text) return;
       await addDoc(collection(db, 'messages'), {
         clientUid: clientUid,
