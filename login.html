@@ -82,7 +82,7 @@
   <script type="module">
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
     import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, sendPasswordResetEmail, updateProfile, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
-    import { getFirestore, doc, setDoc, getDoc } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+    import { getFirestore, doc, setDoc, getDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
     const COACH_EMAILS = ['pappostudios@gmail.com', 'kjfitness.info@gmail.com'];
     function isCoach(email) { return COACH_EMAILS.includes(email.toLowerCase()); }
@@ -114,12 +114,37 @@
 
     async function saveUserProfile(user, name) {
       const role = isCoach(user.email) ? 'coach' : 'client';
-      await setDoc(doc(db, 'users', user.uid), {
-        uid: user.uid,
-        email: user.email,
-        name: name || user.displayName || user.email.split('@')[0],
-        role: role
-      }, { merge: true });
+      const resolvedName = name || user.displayName || user.email.split('@')[0];
+
+      if (role === 'coach') {
+        await setDoc(doc(db, 'users', user.uid), {
+          uid: user.uid,
+          email: user.email,
+          name: resolvedName,
+          role: role
+        }, { merge: true });
+        return role;
+      }
+
+      // Client: only set up the pending-approval profile on first creation,
+      // so re-logins don't reset an already-approved/rejected status.
+      const existing = await getDoc(doc(db, 'users', user.uid));
+      if (!existing.exists()) {
+        await setDoc(doc(db, 'users', user.uid), {
+          uid: user.uid,
+          email: user.email,
+          name: resolvedName,
+          role: role,
+          status: 'pending',
+          createdAt: serverTimestamp()
+        });
+        await setDoc(doc(db, 'pendingRequests', user.uid), {
+          uid: user.uid,
+          email: user.email,
+          name: resolvedName,
+          requestedAt: serverTimestamp()
+        });
+      }
       return role;
     }
 
