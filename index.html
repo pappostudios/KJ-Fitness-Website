@@ -875,14 +875,17 @@ nav a:hover { color: var(--bright-teal); }
 }
 
 .events-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 24px;
   max-width: 1000px;
   margin: 0 auto;
 }
 
 .event-card {
+  flex: 1 1 300px;
+  max-width: 340px;
   background: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: 14px;
@@ -946,6 +949,10 @@ nav a:hover { color: var(--bright-teal); }
   line-height: 1.7;
 }
 
+.event-card p + p {
+  margin-top: 12px;
+}
+
 .events-note {
   text-align: center;
   margin-top: 44px;
@@ -956,14 +963,6 @@ nav a:hover { color: var(--bright-teal); }
 .events-note a {
   color: var(--bright-teal);
   text-decoration: underline;
-}
-
-@media (max-width: 1024px) {
-  .events-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
-@media (max-width: 600px) {
-  .events-grid { grid-template-columns: 1fr; }
 }
 
 /* ===== QUOTE ===== */
@@ -1309,24 +1308,11 @@ footer {
   <div class="events-grid">
 
     <div class="event-card">
-      <div class="event-date"><i class="fas fa-calendar-day"></i> 30 May 2026</div>
-      <h3>Kettlebell Fundamentals Workshop</h3>
-      <div class="event-location"><i class="fas fa-map-marker-alt"></i> Durban, South Africa</div>
-      <p>An in-depth workshop covering kettlebell fundamentals, conditioning for fighters, and flow sequences.</p>
-    </div>
-
-    <div class="event-card">
-      <div class="event-date"><i class="fas fa-calendar-day"></i> 2 June 2026</div>
-      <h3>Pop-Up Workout — "Time" with Ceileigh</h3>
-      <div class="event-location"><i class="fas fa-map-marker-alt"></i> Durban, South Africa</div>
-      <p>A special collaborative pop-up workout session. More details coming soon.</p>
-    </div>
-
-    <div class="event-card">
-      <div class="event-date"><i class="fas fa-calendar-day"></i> Coming Soon</div>
-      <h3>Strength Training Lecture</h3>
-      <div class="event-location"><i class="fas fa-map-marker-alt"></i> Tel Aviv, Israel</div>
-      <p>Introduction to compound strength lifts and a lecture on strength training principles for all levels.</p>
+      <div class="event-date"><i class="fas fa-calendar-day"></i> Saturday, 25 July 2026 &middot; 12:00–13:30</div>
+      <h3>Strength &amp; Conditioning Seminar for Martial Artists</h3>
+      <div class="event-location"><i class="fas fa-map-marker-alt"></i> Fight TLV, Tel Aviv &mdash; ₪100</div>
+      <p>Learn the fundamentals of strength training for martial artists through a combination of theory and practical coaching. Discover how to build strength, improve performance, and reduce injury risk.</p>
+      <p>Registration is through Fight TLV. Please contact Fight TLV directly to book your place.</p>
     </div>
 
   </div>
