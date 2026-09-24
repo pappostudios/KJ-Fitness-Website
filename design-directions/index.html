@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>KJ Fitness Directions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Frank+Ruhl+Libre:wght@500&family=Assistant:wght@400;700&family=Rubik:wght@400;800&family=Heebo:wght@200;300;400&family=Secular+One&family=Noto+Sans:wght@400&family=Noto+Sans+Hebrew:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F8F8; --surface:#FFFFFF; --ink:#0A3236; --muted:#4F6164; --line:#D9E3E4; --accent:#177A83; --chip:#EAF3F4;
+  --frame:#E4ECED;
+  --ui:'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#071E21; --surface:#0C2B2F; --ink:#E8F1F1; --muted:#A7BEC0; --line:#1D4448; --accent:#4EC1CB; --chip:#113A3E; --frame:#0F3337; color-scheme:dark}
+}
+:root[data-theme="dark"]{--bg:#071E21; --surface:#0C2B2F; --ink:#E8F1F1; --muted:#A7BEC0; --line:#1D4448; --accent:#4EC1CB; --chip:#113A3E; --frame:#0F3337; color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:16px;line-height:1.6}
+.page{max-width:1240px;margin:0 auto;padding-inline:clamp(16px,4vw,40px);padding-block:0 80px}
+h1,h2,h3{line-height:1.15;text-wrap:balance;margin:0}
+p{margin:0}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.ltr{direction:ltr;unicode-bidi:isolate}
+.he{direction:rtl;text-align:right}
+
+.top{padding-block:56px 36px;display:grid;grid-template-columns:1.3fr 1fr;gap:32px 56px;align-items:end;border-bottom:1px solid var(--line)}
+.top .brand{display:flex;align-items:center;gap:12px;font-weight:600;margin-bottom:22px}
+.top .brand img{width:36px;height:36px}
+.top h1{font-size:clamp(2.1rem,4.6vw,3.4rem);font-weight:700;letter-spacing:-.02em}
+.top .lead{margin-top:14px;font-size:1.125rem;color:var(--muted);max-width:40em}
+.howto{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px 22px;font-size:.9375rem}
+.howto b{display:block;margin-bottom:6px}
+.howto ul{margin:0;padding-inline-start:18px;display:grid;gap:4px;color:var(--muted)}
+
+.jump{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;gap:8px;flex-wrap:wrap;padding-block:12px;border-bottom:1px solid var(--line)}
+.jump a{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);font-weight:600;font-size:.9375rem;padding:7px 14px;border-radius:999px;background:var(--surface);border:1px solid var(--line)}
+.jump a:hover{border-color:var(--accent)}
+.jump i{width:12px;height:12px;border-radius:3px;flex:none}
+
+.scale{margin-top:40px}
+.label{font-size:.8125rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.scale-row{display:grid;grid-template-columns:repeat(12,1fr);border-radius:10px;overflow:hidden;border:1px solid var(--line)}
+.scale-row div{padding:40px 8px 10px;font-size:.75rem;font-variant-numeric:tabular-nums;line-height:1.3}
+.scale-row b{display:block;font-weight:700}
+.scale-note{margin-top:12px;color:var(--muted);font-size:.9375rem;max-width:62em}
+.scale-wrap{overflow-x:auto}
+
+.dir{padding-block:64px 8px;border-bottom:1px solid var(--line);scroll-margin-top:64px}
+.dir-head{display:grid;grid-template-columns:1fr 1fr;gap:32px 48px}
+.letter{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:10px;font-weight:700;font-size:1.25rem;margin-bottom:14px}
+.dir h2{font-size:clamp(1.8rem,3.4vw,2.5rem);font-weight:700;letter-spacing:-.015em}
+.dir .kind{color:var(--muted);font-weight:500;margin-top:4px}
+.why{margin-top:18px;font-size:1.125rem;max-width:34em}
+.choices{margin:18px 0 0;padding:0;list-style:none;display:grid;gap:8px;font-size:.9375rem}
+.choices li{display:grid;grid-template-columns:118px 1fr;gap:12px}
+.choices b{font-weight:600;color:var(--muted)}
+.open{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.open a{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:600;padding:10px 18px;border-radius:8px;background:var(--ink);color:var(--bg)}
+.open a.alt{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.open a:hover{opacity:.9}
+
+.side{display:grid;gap:18px;align-content:start}
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:8px}
+.sw{border-radius:8px;overflow:hidden;border:1px solid var(--line);background:var(--surface)}
+.sw .c{height:54px}
+.sw .t{padding:8px 10px;font-size:.75rem;line-height:1.35}
+.sw .t b{display:block;font-size:.8125rem;font-variant-numeric:tabular-nums}
+.sw .t span{color:var(--muted)}
+.fonts{border:1px solid var(--line);border-radius:10px;background:var(--surface);overflow:hidden}
+.fonts .spec{padding:16px 18px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.fonts .sample-d{font-size:1.9rem;line-height:1.1}
+.fonts .sample-t{font-size:.9375rem;margin-top:6px;color:var(--muted)}
+.fonts .names{border-top:1px solid var(--line);padding:10px 18px;font-size:.8125rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 18px}
+.fonts .names b{color:var(--ink);font-weight:600}
+.contrast{font-size:.875rem;color:var(--muted);display:grid;gap:4px}
+.contrast span{font-variant-numeric:tabular-nums}
+
+.shots{margin-top:36px;display:grid;gap:28px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.cap{font-size:.875rem;font-weight:600;margin-bottom:8px;display:flex;justify-content:space-between;gap:12px}
+.cap a{font-weight:500;font-size:.8125rem}
+.scroll{height:620px;overflow-y:auto;border-radius:10px;border:1px solid var(--line);background:var(--frame)}
+.scroll img{display:block;width:100%;height:auto}
+.phones{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.phone{border-radius:22px;border:6px solid var(--ink);overflow:hidden;background:var(--frame);aspect-ratio:390/844}
+.phone.scroll{height:auto;border-radius:22px;border:6px solid var(--ink)}
+.phone img{display:block;width:100%;height:auto}
+.small{border-radius:10px;border:1px solid var(--line);overflow:hidden;background:var(--frame)}
+.small img{display:block;width:100%;height:auto}
+.row3{display:grid;grid-template-columns:1.2fr 1fr;gap:20px;align-items:start}
+.stack{display:grid;gap:20px}
+
+.compare{margin-top:64px}
+.compare h2,.notes h2{font-size:clamp(1.6rem,3vw,2.1rem);font-weight:700;margin-bottom:18px}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:860px;font-size:.9375rem}
+th,td{text-align:left;vertical-align:top;padding:12px 14px;border-bottom:1px solid var(--line)}
+thead th{font-size:.875rem}
+tbody th{font-weight:600;color:var(--muted);width:150px}
+tr:last-child th,tr:last-child td{border-bottom:0}
+
+.notes{margin-top:64px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.notes h2{grid-column:1/-1;margin:0}
+.note{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px 22px;font-size:.9375rem}
+.note h3{font-size:1.0625rem;margin-bottom:10px}
+.note ul{margin:0;padding-inline-start:18px;display:grid;gap:6px;color:var(--muted)}
+.note li b{color:var(--ink);font-weight:600}
+.foot{margin-top:48px;color:var(--muted);font-size:.875rem}
+
+@media (max-width:900px){
+  .top,.dir-head,.row2,.row3{grid-template-columns:1fr}
+  .phones{grid-template-columns:1fr 1fr}
+  .notes{grid-template-columns:1fr}
+  .scroll{height:520px}
+  .scale-row{min-width:760px}
+}
+@media (max-width:480px){
+  .choices li{grid-template-columns:1fr;gap:0}
+  .fonts .spec{grid-template-columns:1fr}
+  .phones{gap:10px}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header class="top">
+  <div>
+    <div class="brand"><img src="assets/kj-logo.jpg" alt="KJ Fitness logo" width="36" height="36">KJ Fitness · kirstenjemma.fitness</div>
+    <h1>Four landing page directions</h1>
+    <p class="lead">Each direction is a working prototype with the full page in English and Hebrew. All four are built from the logo teal #26B4C0, meet WCAG AA contrast, and send every call to action to WhatsApp.</p>
+  </div>
+  <div class="howto">
+    <b>How to review</b>
+    <ul>
+      <li>Scroll inside the desktop frames to see each full page.</li>
+      <li>Open a prototype to try the EN / עב toggle, the menu, the services and the consultation modal.</li>
+      <li>A small <i>Events</i> switch in the corner of each prototype shows the populated and empty states. The two events shown are sample data.</li>
+      <li>The Hebrew copy is a draft for Kirsten to review.</li>
+    </ul>
+  </div>
+</header>
+
+<nav class="jump" aria-label="Directions">
+  <a href="#dir-a"><i style="background:#D6F0F2;box-shadow:inset 0 0 0 3px #177A83"></i>A · Studio Journal</a>
+  <a href="#dir-b"><i style="background:#26B4C0"></i>B · Logo Blocks</a>
+  <a href="#dir-c"><i style="background:#062629;box-shadow:inset 0 0 0 3px #26B4C0"></i>C · Evening Session</a>
+  <a href="#dir-d"><i style="background:linear-gradient(135deg,#fff 45%,#26B4C0 45%)"></i>D · Momentum</a>
+  <a href="#compare"><i style="background:var(--muted)"></i>Side by side</a>
+</nav>
+
+<section class="scale" aria-labelledby="scale-h">
+  <p class="label" id="scale-h">Shared teal scale, derived from the logo</p>
+  <div class="scale-wrap"><div class="scale-row">
+    <div style="background:#EEF9FA;color:#0A3236"><b>50</b>#EEF9FA</div>
+    <div style="background:#D6F0F2;color:#0A3236"><b>100</b>#D6F0F2</div>
+    <div style="background:#ADE1E6;color:#0A3236"><b>200</b>#ADE1E6</div>
+    <div style="background:#7CCFD7;color:#0A3236"><b>300</b>#7CCFD7</div>
+    <div style="background:#4EC1CB;color:#0A3236"><b>400</b>#4EC1CB</div>
+    <div style="background:#26B4C0;color:#0A3236;box-shadow:inset 0 -4px 0 #0A3236"><b>500 · logo</b>#26B4C0</div>
+    <div style="background:#1E97A2;color:#0A3236"><b>600</b>#1E97A2</div>
+    <div style="background:#177A83;color:#fff"><b>700</b>#177A83</div>
+    <div style="background:#135F66;color:#fff"><b>800</b>#135F66</div>
+    <div style="background:#0E474C;color:#fff"><b>900</b>#0E474C</div>
+    <div style="background:#0A3236;color:#fff"><b>950</b>#0A3236</div>
+    <div style="background:#062629;color:#fff"><b>975</b>#062629</div>
+  </div></div>
+  <p class="scale-note">White on the logo teal is 2.51:1, so no direction uses it for text; the logo itself is the only white-on-teal. Filled buttons use either 700 with white (5.06:1), 950 with white (13.8:1), or the logo teal with 950 ink (5.50:1). Each direction adds at most one neutral family.</p>
+</section>
+
+<!-- ============ A ============ -->
+<section class="dir" id="dir-a" aria-labelledby="a-h">
+  <div class="dir-head">
+    <div>
+      <span class="letter" style="background:#D6F0F2;color:#0A3236">A</span>
+      <h2 id="a-h">Studio Journal</h2>
+      <p class="kind">Light &amp; editorial</p>
+      <p class="why">A calm, book-like serif and generous white space make KJ read as a considered, grown-up practice, which suits 35+ professionals weighing their options.</p>
+      <ul class="choices">
+        <li><b>Layout</b><span>Split hero with a big serif headline and a tinted panel. Arch-framed portrait, numbered pillars on hairline rules, events as a dated list.</span></li>
+        <li><b>K→J sweep</b><span>Solid logo-teal stroke with a hairline echo in the hero panel. It mirrors in Hebrew.</span></li>
+        <li><b>Services</b><span>Refined accordion next to a sticky intro. Each row shows its price, and the chevron points to the inline end.</span></li>
+        <li><b>Primary CTA</b><span>Teal 700 pill with white label, in the header and hero and in every service.</span></li>
+      </ul>
+      <div class="open"><a href="a-editorial.html#en">Open prototype · EN</a><a class="alt" href="a-editorial.html#he">פתיחה בעברית</a></div>
+    </div>
+    <div class="side">
+      <div class="swatches">
+        <div class="sw"><div class="c" style="background:#FBFAF8"></div><div class="t"><b>#FBFAF8</b><span>Stone 50 · sections</span></div></div>
+        <div class="sw"><div class="c" style="background:#DDD7CE"></div><div class="t"><b>#DDD7CE</b><span>Stone 300 · rules</span></div></div>
+        <div class="sw"><div class="c" style="background:#6B645B"></div><div class="t"><b>#6B645B</b><span>Stone 600 · secondary text</span></div></div>
+        <div class="sw"><div class="c" style="background:#EEF9FA"></div><div class="t"><b>#EEF9FA</b><span>Teal 50 · tint</span></div></div>
+        <div class="sw"><div class="c" style="background:#D6F0F2"></div><div class="t"><b>#D6F0F2</b><span>Teal 100 · quote, panel</span></div></div>
+        <div class="sw"><div class="c" style="background:#26B4C0"></div><div class="t"><b>#26B4C0</b><span>Logo teal · motif only</span></div></div>
+        <div class="sw"><div class="c" style="background:#177A83"></div><div class="t"><b>#177A83</b><span>Teal 700 · buttons, links</span></div></div>
+        <div class="sw"><div class="c" style="background:#0A3236"></div><div class="t"><b>#0A3236</b><span>Teal 950 · text</span></div></div>
+      </div>
+      <div class="fonts">
+        <div class="spec">
+          <div><div class="sample-d" style="font-family:'Frank Ruhl Libre',serif;font-weight:500">Empowered</div><div class="sample-t" style="font-family:'Assistant',sans-serif">Move better, get stronger.</div></div>
+          <div class="he" lang="he"><div class="sample-d" style="font-family:'Frank Ruhl Libre',serif;font-weight:500">עוצמה דרך תנועה</div><div class="sample-t" style="font-family:'Assistant',sans-serif">לנוע טוב יותר, להתחזק.</div></div>
+        </div>
+        <div class="names"><span><b>Display</b> Frank Ruhl Libre 500</span><span><b>Text</b> Assistant 400/600/700</span><span>Both cover Latin and Hebrew</span></div>
+      </div>
+      <div class="contrast"><span>Text #0A3236 on white 13.8:1 · Stone 600 on Stone 50 5.59:1</span><span>White on Teal 700 5.06:1 · Teal 700 on Teal 50 4.72:1</span></div>
+    </div>
+  </div>
+  <div class="shots">
+    <div class="row2">
+      <div><p class="cap">English · desktop 1440, full page <a href="shots/a-en-desktop.jpg" target="_blank">Full size</a></p><div class="scroll" tabindex="0"><img src="shots/a-en-desktop.jpg" alt="Direction A, English desktop, full page" loading="lazy"></div></div>
+      <div><p class="cap">Hebrew RTL · desktop 1440, full page <a href="shots/a-he-desktop.jpg" target="_blank">Full size</a></p><div class="scroll" tabindex="0"><img src="shots/a-he-desktop.jpg" alt="Direction A, Hebrew desktop, full page" loading="lazy"></div></div>
+    </div>
+    <div>
+      <p class="cap">Hebrew · mobile 390: hero, open menu, services, consultation modal</p>
+      <div class="phones">
+        <div class="phone"><img src="shots/a-he-mobile-hero.jpg" alt="A mobile hero, Hebrew" loading="lazy"></div>
+        <div class="phone"><img src="shots/a-he-mobile-menu.jpg" alt="A mobile menu open, Hebrew" loading="lazy"></div>
+        <div class="phone scroll" tabindex="0"><img src="shots/a-he-mobile-services.jpg" alt="A mobile services section, Hebrew" loading="lazy"></div>
+        <div class="phone"><img src="shots/a-he-mobile-modal.jpg" alt="A mobile consultation modal, Hebrew" loading="lazy"></div>
+      </div>
+    </div>
+    <div class="row3">
+      <div><p class="cap">Consultation modal · English desktop</p><div class="small"><img src="shots/a-en-modal.jpg" alt="Direction A consultation modal" loading="lazy"></div></div>
+      <div class="stack">
+        <div><p class="cap">Events empty state · English</p><div class="small"><img src="shots/a-en-events-empty.jpg" alt="Direction A events empty state, English" loading="lazy"></div></div>
+        <div><p class="cap">Events empty state · Hebrew</p><div class="small"><img src="shots/a-he-events-empty.jpg" alt="Direction A events empty state, Hebrew" loading="lazy"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ B ============ -->
+<section class="dir" id="dir-b" aria-labelledby="b-h">
+  <div class="dir-head">
+    <div>
+      <span class="letter" style="background:#26B4C0;color:#0A3236">B</span>
+      <h2 id="b-h">Logo Blocks</h2>
+      <p class="kind">Teal block</p>
+      <p class="why">It takes the logo literally: flat teal fields, square tiles and heavy Rubik type make the brand instantly recognisable and very direct about prices and next steps.</p>
+      <ul class="choices">
+        <li><b>Layout</b><span>Full-bleed teal hero with a 2×2 grid of square tiles, a square portrait with a teal stamp, and pillars as four coloured squares on a dark field.</span></li>
+        <li><b>K→J sweep</b><span>Not used. The motif here is the logo's square format, and the logo appears full-size as a tile.</span></li>
+        <li><b>Services</b><span>A tile grid with every price and inclusion visible at once, so nothing is hidden behind a click.</span></li>
+        <li><b>Primary CTA</b><span>Square ink button (#0A3236, white label) with a hard offset shadow on hover.</span></li>
+      </ul>
+      <div class="open"><a href="b-teal-block.html#en">Open prototype · EN</a><a class="alt" href="b-teal-block.html#he">פתיחה בעברית</a></div>
+    </div>
+    <div class="side">
+      <div class="swatches">
+        <div class="sw"><div class="c" style="background:#26B4C0"></div><div class="t"><b>#26B4C0</b><span>Logo teal · fields</span></div></div>
+        <div class="sw"><div class="c" style="background:#0A3236"></div><div class="t"><b>#0A3236</b><span>Teal 950 · ink, buttons</span></div></div>
+        <div class="sw"><div class="c" style="background:#135F66"></div><div class="t"><b>#135F66</b><span>Teal 800 · deep tiles</span></div></div>
+        <div class="sw"><div class="c" style="background:#D6F0F2"></div><div class="t"><b>#D6F0F2</b><span>Teal 100 · light tiles</span></div></div>
+        <div class="sw"><div class="c" style="background:#FFFFFF"></div><div class="t"><b>#FFFFFF</b><span>White · tiles, header</span></div></div>
+      </div>
+      <div class="fonts">
+        <div class="spec">
+          <div><div class="sample-d" style="font-family:'Rubik',sans-serif;font-weight:800">Empowered</div><div class="sample-t" style="font-family:'Rubik',sans-serif">Move better, get stronger.</div></div>
+          <div class="he" lang="he"><div class="sample-d" style="font-family:'Rubik',sans-serif;font-weight:800">עוצמה דרך תנועה</div><div class="sample-t" style="font-family:'Rubik',sans-serif">לנוע טוב יותר, להתחזק.</div></div>
+        </div>
+        <div class="names"><span><b>Display</b> Rubik 800</span><span><b>Text</b> Rubik 400/500/700</span><span>One family, Latin and Hebrew</span></div>
+      </div>
+      <div class="contrast"><span>Ink on logo teal 5.50:1: headlines on teal are ink, not white</span><span>White on Teal 800 7.35:1 · white on ink 13.8:1 · no neutral family</span></div>
+    </div>
+  </div>
+  <div class="shots">
+    <div class="row2">
+      <div><p class="cap">English · desktop 1440, full page <a href="shots/b-en-desktop.jpg" target="_blank">Full size</a></p><div class="scroll" tabindex="0"><img src="shots/b-en-desktop.jpg" alt="Direction B, English desktop, full page" loading="lazy"></div></div>
+      <div><p class="cap">Hebrew RTL · desktop 1440, full page <a href="shots/b-he-desktop.jpg" target="_blank">Full size</a></p><div class="scroll" tabindex="0"><img src="shots/b-he-desktop.jpg" alt="Direction B, Hebrew desktop, full page" loading="lazy"></div></div>
+    </div>
+    <div>
+      <p class="cap">Hebrew · mobile 390: hero, open menu, services, consultation modal</p>
+      <div class="phones">
+        <div class="phone"><img src="shots/b-he-mobile-hero.jpg" alt="B mobile hero, Hebrew" loading="lazy"></div>
+        <div class="phone"><img src="shots/b-he-mobile-menu.jpg" alt="B mobile menu open, Hebrew" loading="lazy"></div>
+        <div class="phone scroll" tabindex="0"><img src="shots/b-he-mobile-services.jpg" alt="B mobile services section, Hebrew" loading="lazy"></div>
+        <div class="phone"><img src="shots/b-he-mobile-modal.jpg" alt="B mobile consultation modal, Hebrew" loading="lazy"></div>
+      </div>
+    </div>
+    <div class="row3">
+      <div><p class="cap">Consultation modal · English desktop</p><div class="small"><img src="shots/b-en-modal.jpg" alt="Direction B consultation modal" loading="lazy"></div></div>
+      <div class="stack">
+        <div><p class="cap">Events empty state · English</p><div class="small"><img src="shots/b-en-events-empty.jpg" alt="Direction B events empty state, English" loading="lazy"></div></div>
+        <div><p class="cap">Events empty state · Hebrew</p><div class="small"><img src="shots/b-he-events-empty.jpg" alt="Direction B events empty state, Hebrew" loading="lazy"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ C ============ -->
+<section class="dir" id="dir-c" aria-labelledby="c-h">
+  <div class="dir-head">
+    <div>
+      <span class="letter" style="background:#062629;color:#26B4C0;box-shadow:inset 0 0 0 1px #26B4C0">C</span>
+      <h2 id="c-h">Evening Session</h2>
+      <p class="kind">Deep teal premium</p>
+      <p class="why">Dark, quiet and premium, it feels like a private studio after hours. That suits 1:1 and corporate clients, and the logo teal is kept for the moments that matter.</p>
+      <ul class="choices">
+        <li><b>Layout</b><span>Headline-led hero over a large gradient sweep, facts along a hairline, the portrait with a J-hook corner, and pillars in thin vertical columns.</span></li>
+        <li><b>K→J sweep</b><span>Hero shape (deep-to-logo-teal gradient), the photo mask's rounded corner, and a hairline sweep behind the quote.</span></li>
+        <li><b>Services</b><span>Tabs: a vertical list with prices on desktop, swipeable chips on mobile. Arrow keys follow reading direction.</span></li>
+        <li><b>Primary CTA</b><span>Logo-teal pill with ink label (6.36:1). The mobile menu is a drawer from the inline end.</span></li>
+      </ul>
+      <div class="open"><a href="c-deep-teal.html#en">Open prototype · EN</a><a class="alt" href="c-deep-teal.html#he">פתיחה בעברית</a></div>
+    </div>
+    <div class="side">
+      <div class="swatches">
+        <div class="sw"><div class="c" style="background:#062629"></div><div class="t"><b>#062629</b><span>Teal 975 · page</span></div></div>
+        <div class="sw"><div class="c" style="background:#0A3236"></div><div class="t"><b>#0A3236</b><span>Teal 950 · alt sections</span></div></div>
+        <div class="sw"><div class="c" style="background:#0E474C"></div><div class="t"><b>#0E474C</b><span>Teal 900 · cards</span></div></div>
+        <div class="sw"><div class="c" style="background:#135F66"></div><div class="t"><b>#135F66</b><span>Teal 800 · rules</span></div></div>
+        <div class="sw"><div class="c" style="background:#26B4C0"></div><div class="t"><b>#26B4C0</b><span>Logo teal · CTA, highlight</span></div></div>
+        <div class="sw"><div class="c" style="background:#ADE1E6"></div><div class="t"><b>#ADE1E6</b><span>Teal 200 · secondary text</span></div></div>
+        <div class="sw"><div class="c" style="background:#F4F0EA"></div><div class="t"><b>#F4F0EA</b><span>Bone · primary text</span></div></div>
+        <div class="sw"><div class="c" style="background:#DCD5CA"></div><div class="t"><b>#DCD5CA</b><span>Bone 2 · body copy</span></div></div>
+      </div>
+      <div class="fonts" style="background:#062629;color:#F4F0EA;border-color:#0E474C">
+        <div class="spec">
+          <div><div class="sample-d" style="font-family:'Heebo',sans-serif;font-weight:200">Empowered</div><div class="sample-t" style="font-family:'Heebo',sans-serif;color:#ADE1E6">Move better, get stronger.</div></div>
+          <div class="he" lang="he"><div class="sample-d" style="font-family:'Heebo',sans-serif;font-weight:300">עוצמה דרך תנועה</div><div class="sample-t" style="font-family:'Heebo',sans-serif;color:#ADE1E6">לנוע טוב יותר, להתחזק.</div></div>
+        </div>
+        <div class="names" style="border-color:#0E474C;color:#ADE1E6"><span><b style="color:#F4F0EA">Display</b> Heebo 200 (Latin) / 300 (Hebrew)</span><span><b style="color:#F4F0EA">Text</b> Heebo 300/400/500</span></div>
+      </div>
+      <div class="contrast"><span>Bone on 975 14.1:1 · Teal 200 on 900 7.26:1</span><span>Logo teal on 975 6.36:1 · on 900 only for large type (4.14:1)</span></div>
+    </div>
+  </div>
+  <div class="shots">
+    <div class="row2">
+      <div><p class="cap">English · desktop 1440, full page <a href="shots/c-en-desktop.jpg" target="_blank">Full size</a></p><div class="scroll" tabindex="0"><img src="shots/c-en-desktop.jpg" alt="Direction C, English desktop, full page" loading="lazy"></div></div>
+      <div><p class="cap">Hebrew RTL · desktop 1440, full page <a href="shots/c-he-desktop.jpg" target="_blank">Full size</a></p><div class="scroll" tabindex="0"><img src="shots/c-he-desktop.jpg" alt="Direction C, Hebrew desktop, full page" loading="lazy"></div></div>
+    </div>
+    <div>
+      <p class="cap">Hebrew · mobile 390: hero, open menu, services, consultation modal</p>
+      <div class="phones">
+        <div class="phone"><img src="shots/c-he-mobile-hero.jpg" alt="C mobile hero, Hebrew" loading="lazy"></div>
+        <div class="phone"><img src="shots/c-he-mobile-menu.jpg" alt="C mobile menu open, Hebrew" loading="lazy"></div>
+        <div class="phone scroll" tabindex="0"><img src="shots/c-he-mobile-services.jpg" alt="C mobile services section, Hebrew" loading="lazy"></div>
+        <div class="phone"><img src="shots/c-he-mobile-modal.jpg" alt="C mobile consultation modal, Hebrew" loading="lazy"></div>
+      </div>
+    </div>
+    <div class="row3">
+      <div><p class="cap">Consultation modal · English desktop</p><div class="small"><img src="shots/c-en-modal.jpg" alt="Direction C consultation modal" loading="lazy"></div></div>
+      <div class="stack">
+        <div><p class="cap">Events empty state · English</p><div class="small"><img src="shots/c-en-events-empty.jpg" alt="Direction C events empty state, English" loading="lazy"></div></div>
+        <div><p class="cap">Events empty state · Hebrew</p><div class="small"><img src="shots/c-he-events-empty.jpg" alt="Direction C events empty state, Hebrew" loading="lazy"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ D ============ -->
+<section class="dir" id="dir-d" aria-labelledby="d-h">
+  <div class="dir-head">
+    <div>
+      <span class="letter" style="background:#26B4C0;color:#0A3236">D</span>
+      <h2 id="d-h">Momentum</h2>
+      <p class="kind">Athletic motion</p>
+      <p class="why">The K→J sweep becomes movement itself. Diagonals, curved section edges and a rising stair of pillars bring energy without neon or bro-gym clichés.</p>
+      <ul class="choices">
+        <li><b>Layout</b><span>A giant sweep crosses the hero and draws itself in on load. A slow pillar ticker, a slanted portrait, ticket-style events and curved section edges follow.</span></li>
+        <li><b>K→J sweep</b><span>Dominant. It appears in the hero, as curved section breaks, behind the quote and in the empty events state, and every instance mirrors in Hebrew.</span></li>
+        <li><b>Services</b><span>A side-by-side comparison of the three coaching plans (Hybrid marked “Best of both”), plus two wide banners for the class and corporate.</span></li>
+        <li><b>Primary CTA</b><span>Slanted logo-teal button with ink label. On mobile a sticky WhatsApp bar stays in reach, and the modal opens as a bottom sheet.</span></li>
+      </ul>
+      <div class="open"><a href="d-motion.html#en">Open prototype · EN</a><a class="alt" href="d-motion.html#he">פתיחה בעברית</a></div>
+    </div>
+    <div class="side">
+      <div class="swatches">
+        <div class="sw"><div class="c" style="background:#FFFFFF"></div><div class="t"><b>#FFFFFF</b><span>Page</span></div></div>
+        <div class="sw"><div class="c" style="background:#EEF9FA"></div><div class="t"><b>#EEF9FA</b><span>Teal 50 · about</span></div></div>
+        <div class="sw"><div class="c" style="background:#D6F0F2"></div><div class="t"><b>#D6F0F2</b><span>Teal 100 · highlight</span></div></div>
+        <div class="sw"><div class="c" style="background:#26B4C0"></div><div class="t"><b>#26B4C0</b><span>Logo teal · sweep, CTA</span></div></div>
+        <div class="sw"><div class="c" style="background:#177A83"></div><div class="t"><b>#177A83</b><span>Teal 700 · small accents</span></div></div>
+        <div class="sw"><div class="c" style="background:#0A3236"></div><div class="t"><b>#0A3236</b><span>Teal 950 · ink</span></div></div>
+        <div class="sw"><div class="c" style="background:#F3F5F5"></div><div class="t"><b>#F3F5F5</b><span>Graphite 50 · cards</span></div></div>
+        <div class="sw"><div class="c" style="background:#5B6668"></div><div class="t"><b>#5B6668</b><span>Graphite 600 · secondary</span></div></div>
+      </div>
+      <div class="fonts">
+        <div class="spec">
+          <div><div class="sample-d" style="font-family:'Secular One',sans-serif">Empowered</div><div class="sample-t" style="font-family:'Noto Sans',sans-serif">Move better, get stronger.</div></div>
+          <div class="he" lang="he"><div class="sample-d" style="font-family:'Secular One',sans-serif">עוצמה דרך תנועה</div><div class="sample-t" style="font-family:'Noto Sans Hebrew',sans-serif">לנוע טוב יותר, להתחזק.</div></div>
+        </div>
+        <div class="names"><span><b>Display</b> Secular One</span><span><b>Text</b> Noto Sans + Noto Sans Hebrew 400/500/700</span></div>
+      </div>
+      <div class="contrast"><span>Ink on logo teal 5.50:1 (buttons, text on teal fields)</span><span>Graphite 600 on white 5.92:1 · Teal 700 on Teal 50 4.72:1</span></div>
+    </div>
+  </div>
+  <div class="shots">
+    <div class="row2">
+      <div><p class="cap">English · desktop 1440, full page <a href="shots/d-en-desktop.jpg" target="_blank">Full size</a></p><div class="scroll" tabindex="0"><img src="shots/d-en-desktop.jpg" alt="Direction D, English desktop, full page" loading="lazy"></div></div>
+      <div><p class="cap">Hebrew RTL · desktop 1440, full page <a href="shots/d-he-desktop.jpg" target="_blank">Full size</a></p><div class="scroll" tabindex="0"><img src="shots/d-he-desktop.jpg" alt="Direction D, Hebrew desktop, full page" loading="lazy"></div></div>
+    </div>
+    <div>
+      <p class="cap">Hebrew · mobile 390: hero, open menu, services, consultation modal</p>
+      <div class="phones">
+        <div class="phone"><img src="shots/d-he-mobile-hero.jpg" alt="D mobile hero, Hebrew" loading="lazy"></div>
+        <div class="phone"><img src="shots/d-he-mobile-menu.jpg" alt="D mobile menu open, Hebrew" loading="lazy"></div>
+        <div class="phone scroll" tabindex="0"><img src="shots/d-he-mobile-services.jpg" alt="D mobile services section, Hebrew" loading="lazy"></div>
+        <div class="phone"><img src="shots/d-he-mobile-modal.jpg" alt="D mobile consultation modal as bottom sheet, Hebrew" loading="lazy"></div>
+      </div>
+    </div>
+    <div class="row3">
+      <div><p class="cap">Consultation modal · English desktop</p><div class="small"><img src="shots/d-en-modal.jpg" alt="Direction D consultation modal" loading="lazy"></div></div>
+      <div class="stack">
+        <div><p class="cap">Events empty state · English</p><div class="small"><img src="shots/d-en-events-empty.jpg" alt="Direction D events empty state, English" loading="lazy"></div></div>
+        <div><p class="cap">Events empty state · Hebrew</p><div class="small"><img src="shots/d-he-events-empty.jpg" alt="Direction D events empty state, Hebrew" loading="lazy"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="compare" id="compare" aria-labelledby="cmp-h">
+  <h2 id="cmp-h">Side by side</h2>
+  <div class="tbl">
+    <table>
+      <thead><tr><th></th><th>A · Studio Journal</th><th>B · Logo Blocks</th><th>C · Evening Session</th><th>D · Momentum</th></tr></thead>
+      <tbody>
+        <tr><th>Ground</th><td>White and stone, teal tints</td><td>Flat logo teal and white</td><td>Deep teal 975/950</td><td>White, with teal fields</td></tr>
+        <tr><th>Type voice</th><td>Serif display, humanist text</td><td>Heavy rounded sans</td><td>Light, airy sans</td><td>Condensed-feel display, neutral text</td></tr>
+        <tr><th>K→J sweep</th><td>Hero panel</td><td>Not used (square tiles)</td><td>Hero shape, photo mask, quote</td><td>Hero, section edges, quote, empty state</td></tr>
+        <tr><th>Portrait</th><td>Arch frame</td><td>Square crop with teal stamp</td><td>J-hook corner</td><td>Slanted crop</td></tr>
+        <tr><th>Services</th><td>Accordion</td><td>Tile grid, all open</td><td>Tabs / chips</td><td>Plan comparison + banners</td></tr>
+        <tr><th>Mobile CTA</th><td>WhatsApp icon in header</td><td>WhatsApp square in header</td><td>WhatsApp circle in header</td><td>Sticky bottom bar</td></tr>
+        <tr><th>Mobile menu</th><td>Full sheet, numbered</td><td>Full teal screen</td><td>Drawer from inline end</td><td>Dark panel with wipe</td></tr>
+        <tr><th>Best for</th><td>Trust and clarity, older audience</td><td>Recognition and directness</td><td>Premium 1:1 and corporate</td><td>Energy and the outdoor class</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="notes" aria-labelledby="notes-h">
+  <h2 id="notes-h">For Kirsten to check</h2>
+  <div class="note">
+    <h3>Hebrew draft</h3>
+    <ul>
+      <li>Slogan: <b lang="he">עוצמה דרך תנועה</b> for “Empowered Through Movement”.</li>
+      <li>Class name: <b lang="he">קבוצת כוח לאריכות ימים</b>.</li>
+      <li>Location spelling: <b lang="he">בניין דניאל מוריץ</b>.</li>
+      <li>Slash forms: <span lang="he">מוכן/ה, בחר/י, חזק/ה, מתעניין/ת</span>. Elsewhere the copy uses neutral phrasing.</li>
+      <li>The prefilled WhatsApp messages switch language with the toggle.</li>
+    </ul>
+  </div>
+  <div class="note">
+    <h3>Photos to shoot</h3>
+    <ul>
+      <li><b>Outdoor Longevity class</b>: a group mid-exercise in evening light (A, C, D).</li>
+      <li><b>Corporate session</b>: a team training in an office space (C, D).</li>
+      <li><b>1:1 coaching</b>: Kirsten cueing a client, close-up.</li>
+      <li><b>Hero option</b>: Kirsten moving outdoors, landscape, with space for type.</li>
+    </ul>
+  </div>
+  <div class="note">
+    <h3>Open questions</h3>
+    <ul>
+      <li>Does Private Coaching include app access? D’s comparison only lists the in-person format for now.</li>
+      <li>The two events are sample data. The only real event (25 July 2026) has passed.</li>
+      <li>The Facebook link still points to /KirstenMMA.</li>
+      <li>Font Awesome is replaced by inline SVG icons, so the final page needs no icon library.</li>
+    </ul>
+  </div>
+</section>
+
+<p class="foot">Prototypes share one copy file (kj-proto.js). The final build will inline it into a single static HTML page for GitHub Pages.</p>
+</div>
+</body>
+</html>

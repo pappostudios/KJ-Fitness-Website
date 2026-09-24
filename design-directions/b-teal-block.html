@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KJ Fitness — Empowered Through Movement</title>
+<!-- Direction B · Teal Block — Rubik (Latin + Hebrew, one family) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --t100:#D6F0F2; --t500:#26B4C0; --t800:#135F66; --t950:#0A3236; --w:#FFFFFF;
+  --f:'Rubik', system-ui, sans-serif;
+  --wrap:1320px; --gut:clamp(16px,3.5vw,48px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--f);font-size:1.0625rem;line-height:1.6;color:var(--t950);background:var(--w);overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+ul,ol{list-style:none}
+.ltr{direction:ltr;unicode-bidi:isolate}
+.ic{width:1.2em;height:1.2em;flex:none;display:inline-block;vertical-align:-.22em}
+.i-arr,.i-chev{width:1.2em;height:1.2em;flex:none;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:square;stroke-linejoin:miter}
+[dir=rtl] .i-arr{transform:scaleX(-1)}
+:focus-visible{outline:3px solid var(--t950);outline-offset:3px}
+.teal :focus-visible,.ink :focus-visible{outline-color:var(--w)}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-inline:var(--gut)}
+h1,h2,h3{font-weight:800;line-height:.98;letter-spacing:-.025em}
+[lang=he] h1,[lang=he] h2,[lang=he] h3{letter-spacing:0;line-height:1.05}
+h2{font-size:clamp(2.4rem,5.4vw,4.75rem)}
+.kicker{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:1rem;margin-bottom:20px}
+.kicker::before{content:"";width:14px;height:14px;background:currentColor}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:52px;padding:14px 26px;font-weight:700;font-size:1.0625rem;text-decoration:none;border:2px solid transparent;transition:transform .15s,box-shadow .15s,background .15s}
+.btn-ink{background:var(--t950);color:var(--w)}
+.btn-ink:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--w)}
+.on-white .btn-ink:hover{box-shadow:6px 6px 0 var(--t500)}
+.btn-line{border-color:var(--t950);color:var(--t950)}
+.btn-line:hover{background:var(--t950);color:var(--w)}
+.btn-white{background:var(--w);color:var(--t950)}
+.btn-white:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--t500)}
+.btn-xl{min-height:68px;padding:18px 36px;font-size:1.25rem}
+.btn .ic-wa{width:1.4em;height:1.4em}
+
+/* header */
+.hdr{position:sticky;top:0;z-index:50;background:var(--w);border-bottom:2px solid var(--t950)}
+.hdr .wrap{display:flex;align-items:center;gap:24px;height:80px}
+.brand{display:flex;align-items:center;gap:14px;text-decoration:none;font-weight:800;font-size:1.25rem;letter-spacing:-.01em}
+.brand img{width:48px;height:48px}
+.nav{display:flex;gap:4px;margin-inline-start:auto}
+.nav a{text-decoration:none;font-weight:500;padding:8px 12px}
+.nav a:hover{background:var(--t100)}
+.acts{display:flex;align-items:center;gap:12px}
+.lang{display:flex;border:2px solid var(--t950)}
+.lang button{width:44px;height:40px;font-weight:700;font-size:.9375rem}
+.lang button[aria-pressed=true]{background:var(--t950);color:var(--w)}
+.login{display:flex;align-items:center;gap:8px;text-decoration:none;font-weight:500;padding:8px 6px}
+.hdr .btn{min-height:44px;padding:8px 18px;font-size:1rem}
+.burger{display:none;width:44px;height:44px;background:var(--t500);position:relative}
+.burger i,.burger i::before,.burger i::after{position:absolute;inset-inline-start:11px;width:22px;height:2.5px;background:var(--t950);transition:transform .2s,background .2s}
+.burger i{top:21px}
+.burger i::before,.burger i::after{content:"";inset-inline-start:0}
+.burger i::before{top:-7px}.burger i::after{top:7px}
+.menu-open .burger i{background:transparent}
+.menu-open .burger i::before{transform:translateY(7px) rotate(45deg)}
+.menu-open .burger i::after{transform:translateY(-7px) rotate(-45deg)}
+
+.menu{position:fixed;inset:0;top:66px;z-index:49;background:var(--t500);padding:24px var(--gut) 32px;display:none;flex-direction:column;gap:24px;overflow:auto}
+.menu-open .menu{display:flex}
+.menu nav{display:grid;gap:2px}
+.menu nav a{display:flex;justify-content:space-between;align-items:center;text-decoration:none;font-weight:800;font-size:2.1rem;line-height:1.1;padding:10px 0;border-bottom:2px solid var(--t950)}
+.menu .btn{width:100%}
+.menu .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+/* hero */
+.teal{background:var(--t500);color:var(--t950)}
+.ink{background:var(--t950);color:var(--w)}
+.hero{padding:clamp(40px,6vw,80px) 0 0}
+.hero .wrap{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+.hero-main{grid-column:1/8;padding-bottom:clamp(40px,6vw,80px)}
+.hero-loc{display:inline-flex;align-items:center;gap:10px;font-weight:700;background:var(--w);padding:8px 14px;margin-bottom:28px}
+.hero h1{font-size:clamp(3.1rem,8.4vw,8rem);margin-bottom:32px}
+.hero h1 span{display:block}
+.hero-mission{font-size:clamp(1.15rem,1.7vw,1.45rem);font-weight:500;max-width:30em;margin-bottom:36px;line-height:1.5}
+.ctas{display:flex;flex-wrap:wrap;gap:14px}
+.hero-tiles{grid-column:8/13;display:grid;grid-template-columns:1fr 1fr;align-content:end;align-self:end}
+.tile{aspect-ratio:1/1;padding:clamp(14px,1.6vw,22px);display:flex;flex-direction:column;justify-content:space-between;text-decoration:none}
+.tile b{font-size:clamp(1.6rem,2.8vw,2.6rem);font-weight:800;line-height:1;letter-spacing:-.02em}
+.tile > span{font-weight:500;font-size:.96875rem;line-height:1.35}
+.t-white{background:var(--w);color:var(--t950)}
+.t-ink{background:var(--t950);color:var(--w)}
+.t-deep{background:var(--t800);color:var(--w)}
+.t-light{background:var(--t100);color:var(--t950)}
+.t-teal{background:var(--t500);color:var(--t950)}
+.tile .ic{width:34px;height:34px}
+.tile-logo{padding:0}
+.tile-logo img{width:100%;height:100%;object-fit:cover}
+a.tile:hover{outline:3px solid var(--t950);outline-offset:-3px}
+
+/* about */
+.about{padding:clamp(64px,8vw,120px) 0}
+.about .wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,72px);align-items:start}
+.about-photo{position:relative;padding-inline-end:clamp(32px,5vw,72px);padding-bottom:clamp(32px,5vw,72px)}
+.about-photo img{aspect-ratio:1/1;width:100%;height:auto;object-fit:cover;object-position:50% 22%}
+.about-photo .stamp{position:absolute;inset-inline-end:0;bottom:0;width:48%;aspect-ratio:1/1;background:var(--t500);color:var(--t950);padding:clamp(16px,2vw,26px);display:flex;align-items:flex-end;font-weight:800;font-size:clamp(1.3rem,2.2vw,2rem);line-height:1.05;letter-spacing:-.015em}
+[lang=he] .about-photo .stamp{letter-spacing:0}
+.about h2{margin-bottom:28px}
+.about p{margin-bottom:16px;max-width:36em}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:32px}
+.stats li{background:var(--t100);padding:16px}
+.stats b{display:block;font-weight:800;font-size:1.3rem;line-height:1.1;margin-bottom:6px}
+.stats li > span{font-size:.9375rem;line-height:1.35;display:block}
+
+/* approach */
+.approach{padding:clamp(64px,8vw,120px) 0}
+.head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:20px 48px;margin-bottom:clamp(32px,4vw,56px)}
+.head p{max-width:30em;font-size:1.125rem}
+.ink .head p{color:var(--t100)}
+.pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.pillars .tile{aspect-ratio:auto;min-height:clamp(260px,24vw,330px)}
+.pillars .n{font-weight:800;font-size:clamp(3rem,5vw,4.5rem);line-height:.9}
+.pillars h3{font-size:clamp(1.5rem,2vw,1.85rem);margin-bottom:10px;line-height:1.05}
+.pillars p{font-size:1rem;line-height:1.45}
+
+/* events */
+.events{padding:clamp(64px,8vw,120px) 0}
+.sample{display:inline-flex;gap:8px;align-items:center;font-weight:700;font-size:.875rem;border:2px dashed var(--t950);padding:6px 12px}
+.ev-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.ev{display:grid;grid-template-columns:clamp(110px,11vw,150px) 1fr}
+.ev-date{background:var(--t500);display:flex;flex-direction:column;justify-content:space-between;padding:16px;aspect-ratio:1/1}
+.ev-date b{font-size:clamp(3rem,5vw,4.5rem);font-weight:800;line-height:.85}
+.ev-date span{font-weight:700;font-size:1.125rem}
+.ev-body{background:var(--t100);padding:20px 24px;display:flex;flex-direction:column;gap:10px}
+.ev-body h3{font-size:1.45rem;line-height:1.1;letter-spacing:-.01em}
+.ev-meta{display:grid;gap:4px;font-size:.9375rem;font-weight:500}
+.ev-meta > span{display:flex;align-items:center;gap:8px}
+.ev-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:auto;padding-top:10px;border-top:2px solid var(--t950)}
+.ev-price{font-weight:800;font-size:1.6rem}
+.ev-foot a{display:inline-flex;align-items:center;gap:8px;font-weight:700;text-decoration:none}
+.ev-foot a:hover{text-decoration:underline}
+.ev-empty{display:none;grid-template-columns:auto 1fr;gap:0}
+.ev-empty .sq{background:var(--t500);aspect-ratio:1/1;width:clamp(120px,16vw,220px);display:grid;place-items:center}
+.ev-empty .sq .ic{width:40%;height:40%}
+.ev-empty .body{background:var(--t950);color:var(--w);padding:clamp(24px,3vw,40px);display:flex;flex-wrap:wrap;gap:20px 40px;align-items:center;justify-content:space-between}
+.ev-empty h3{font-size:clamp(1.8rem,3vw,2.6rem);margin-bottom:8px}
+.ev-empty p{max-width:32em;color:var(--t100)}
+#events[data-state=empty] .ev-grid,#events[data-state=empty] .sample{display:none}
+#events[data-state=empty] .ev-empty{display:grid}
+
+/* quote */
+.quote{padding:clamp(72px,10vw,140px) 0}
+.quote .wrap{display:grid;grid-template-columns:auto 1fr;gap:clamp(24px,4vw,56px);align-items:start}
+.qmark{width:clamp(64px,8vw,112px);aspect-ratio:1/1;background:var(--w);display:grid;place-items:center;font-size:clamp(4rem,8vw,7rem);font-weight:800;line-height:1;padding-top:.3em}
+.quote p{font-size:clamp(1.7rem,3.6vw,3.2rem);font-weight:700;line-height:1.12;letter-spacing:-.015em;max-width:22em}
+[lang=he] .quote p{letter-spacing:0;line-height:1.2}
+.quote footer{margin-top:28px;display:inline-flex;gap:0;font-weight:700}
+.quote footer b{background:var(--t950);color:var(--w);padding:8px 14px}
+.quote footer span{background:var(--w);padding:8px 14px;font-weight:500}
+
+/* services */
+.services{padding:clamp(64px,8vw,120px) 0;background:var(--t100)}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.svc{padding:clamp(22px,2.4vw,32px);display:flex;flex-direction:column;gap:14px}
+.svc.wide{grid-column:span 2}
+.svc-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.svc .tag{display:inline-block;font-weight:700;font-size:.875rem;padding:4px 10px;border:2px solid currentColor}
+.svc .ic-box{width:52px;height:52px;display:grid;place-items:center;background:var(--t500);color:var(--t950);flex:none}
+.t-teal .ic-box{background:var(--t950);color:var(--w)}
+.t-deep .ic-box,.t-ink .ic-box{background:var(--t500);color:var(--t950)}
+.svc .ic-box .ic{width:26px;height:26px}
+.svc h3{font-size:clamp(1.7rem,2.4vw,2.2rem);line-height:1.02}
+.price{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.price b{font-size:clamp(2.2rem,3.4vw,3rem);font-weight:800;line-height:1}
+.price span{font-weight:500}
+.svc > p{font-size:1rem;line-height:1.5}
+.feat{display:grid;gap:8px;font-size:.96875rem;line-height:1.4}
+.feat li{display:flex;gap:10px;align-items:flex-start}
+.feat li::before{content:"";width:10px;height:10px;background:currentColor;flex:none;margin-top:.4em}
+.rates{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.rates li{background:var(--t100);padding:16px;display:flex;flex-direction:column;gap:6px}
+.rates b{font-size:clamp(1.5rem,2.2vw,2rem);font-weight:800;line-height:1.05}
+.rates small{font-size:.875rem;font-weight:500}
+.svc .btn{margin-top:auto;align-self:flex-start}
+.svc.t-white .btn-ink:hover{box-shadow:6px 6px 0 var(--t500)}
+.svc.t-teal .btn-ink:hover{box-shadow:6px 6px 0 var(--w)}
+.svc.t-deep .btn-white:hover,.svc.t-ink .btn-white:hover{box-shadow:6px 6px 0 var(--t500)}
+
+/* contact */
+.contact{padding:clamp(64px,8vw,120px) 0}
+.contact h2{font-size:clamp(2.8rem,8vw,7.5rem);max-width:10em;margin-bottom:24px}
+.contact .lead{font-size:clamp(1.15rem,1.6vw,1.35rem);font-weight:500;max-width:30em;margin-bottom:36px}
+.chan{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:clamp(40px,5vw,72px)}
+.chan a{aspect-ratio:auto;min-height:200px}
+.chan .ic{width:36px;height:36px}
+.chan b{font-size:1.6rem}
+.chan a > span{font-size:1rem}
+.chan span .ltr{font-weight:700}
+
+/* footer */
+.foot{padding:48px 0 28px}
+.foot .wrap{display:grid;grid-template-columns:auto 1fr auto;gap:24px 40px;align-items:center}
+.foot .tagline{font-weight:800;font-size:clamp(1.3rem,2vw,1.75rem);color:var(--t500)}
+.social{display:flex;gap:6px}
+.social a{width:48px;height:48px;background:var(--t500);color:var(--t950);display:grid;place-items:center}
+.social a:hover{background:var(--w)}
+.social .ic{width:22px;height:22px}
+.copy{grid-column:1/-1;border-top:2px solid var(--t800);padding-top:20px;font-size:.9375rem;color:var(--t100)}
+
+/* modal */
+.modal{position:fixed;inset:0;z-index:100;background:rgba(10,50,54,.72);display:grid;place-items:center;padding:16px}
+.modal[hidden]{display:none}
+.modal-box{background:var(--w);width:min(720px,100%);max-height:calc(100dvh - 32px);overflow:auto;position:relative;border:3px solid var(--t950)}
+.modal-head{background:var(--t500);padding:clamp(20px,3vw,32px);padding-inline-end:72px}
+.modal-head .kicker{margin-bottom:12px}
+.modal-head h2{font-size:clamp(1.9rem,4vw,2.8rem)}
+.modal-head p{margin-top:10px;font-weight:500}
+.modal-x{position:absolute;inset-block-start:0;inset-inline-end:0;width:56px;height:56px;background:var(--t950);color:var(--w);display:grid;place-items:center}
+.modal-x .ic{width:24px;height:24px}
+.opts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:clamp(16px,2.4vw,24px)}
+.consult-opt{background:var(--t100);min-height:130px;padding:16px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;text-decoration:none;font-weight:700;font-size:1.0625rem;line-height:1.2;transition:background .15s,color .15s}
+.consult-opt .ic{width:30px;height:30px}
+.consult-opt .row{display:flex;justify-content:space-between;align-items:flex-end;gap:8px}
+.consult-opt:hover{background:var(--t950);color:var(--w)}
+.modal-foot{display:flex;align-items:center;gap:8px;padding:0 clamp(16px,2.4vw,24px) 20px;font-weight:500;font-size:.9375rem}
+body.modal-open{overflow:hidden}
+
+.proto{position:fixed;inset-block-end:16px;inset-inline-start:16px;z-index:60;background:var(--t950);color:var(--w);border:2px solid var(--w);padding:4px;display:flex;gap:4px;align-items:center;font-size:.8125rem;font-weight:700}
+.proto > span{padding-inline:8px}
+.proto button{padding:4px 10px;color:var(--t100)}
+.proto button[aria-pressed=true]{background:var(--t500);color:var(--t950)}
+.shot .proto{display:none}
+
+@media (max-width:1180px){
+  .nav{display:none}
+  .burger{display:block}
+  .acts{margin-inline-start:auto}
+  .hero-main{grid-column:1/-1}
+  .hero-tiles{grid-column:1/-1;grid-template-columns:repeat(4,1fr)}
+  .pillars{grid-template-columns:1fr 1fr}
+  .svc-grid{grid-template-columns:1fr 1fr}
+  .svc.wide{grid-column:1/-1}
+}
+@media (max-width:860px){
+  .about .wrap{grid-template-columns:1fr}
+  .ev-grid{grid-template-columns:1fr}
+  .foot .wrap{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .hdr .wrap{height:66px;gap:10px}
+  .brand span,.hdr .login{display:none}
+  .brand img{width:44px;height:44px}
+  .acts{gap:6px}
+  .hdr .btn{width:44px;padding:0}
+  .hdr .btn span{display:none}
+  .lang button{width:40px}
+  .hero-tiles{grid-template-columns:1fr 1fr}
+  .ctas .btn{width:100%}
+  .pillars{grid-template-columns:1fr}
+  .pillars .tile{min-height:0;gap:18px}
+  .svc-grid{grid-template-columns:1fr}
+  .rates{grid-template-columns:1fr}
+  .rates li{flex-direction:row;justify-content:space-between;align-items:baseline;flex-wrap:wrap}
+  .stats{grid-template-columns:1fr}
+  .ev{grid-template-columns:96px 1fr}
+  .ev-date{padding:12px}
+  .ev-empty{grid-template-columns:1fr}
+  .ev-empty .sq{width:100%;aspect-ratio:3/1}
+  .ev-empty .sq .ic{width:56px;height:56px}
+  .quote .wrap{grid-template-columns:1fr}
+  .chan{grid-template-columns:1fr}
+  .chan a{min-height:0;gap:18px}
+  .contact .btn{width:100%}
+  .opts{grid-template-columns:1fr 1fr}
+  .consult-opt{min-height:112px}
+}
+</style>
+</head>
+<body class="on-white">
+
+<header class="hdr" data-header>
+  <div class="wrap">
+    <a class="brand" href="#home"><img src="assets/kj-logo.jpg" alt="KJ Fitness logo" width="48" height="48"><span>KJ Fitness</span></a>
+    <nav class="nav" aria-label="Main">
+      <a href="#home" data-i18n="nav.home">Home</a>
+      <a href="#about" data-i18n="nav.about">About</a>
+      <a href="#services" data-i18n="nav.services">Services</a>
+      <a href="#events" data-i18n="nav.events">Upcoming Events</a>
+      <a href="#contact" data-i18n="nav.contact">Contact</a>
+    </nav>
+    <div class="acts">
+      <div class="lang" role="group" data-i18n-aria="lang.label"><button data-lang-btn="en" lang="en" aria-pressed="true">EN</button><button data-lang-btn="he" lang="he" aria-pressed="false">עב</button></div>
+      <a class="login" href="../login.html"><svg class="ic" aria-hidden="true"><use href="#i-user"/></svg><span data-i18n="cta.login">Login</span></a>
+      <a class="btn btn-ink" href="#" data-consult data-i18n-aria="cta.consult"><svg class="ic ic-wa" aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="cta.consult">Free Consultation</span></a>
+      <button class="burger" data-menu-toggle aria-expanded="false" aria-controls="menu" data-i18n-aria="menu.open"><i></i></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu">
+  <nav aria-label="Mobile">
+    <a href="#home" data-menu-link><span data-i18n="nav.home"></span><svg class="i-arr" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
+    <a href="#about" data-menu-link><span data-i18n="nav.about"></span><svg class="i-arr" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
+    <a href="#services" data-menu-link><span data-i18n="nav.services"></span><svg class="i-arr" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
+    <a href="#events" data-menu-link><span data-i18n="nav.events"></span><svg class="i-arr" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
+    <a href="#contact" data-menu-link><span data-i18n="nav.contact"></span><svg class="i-arr" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
+  </nav>
+  <a class="btn btn-ink btn-xl" href="#" data-consult><svg class="ic ic-wa" aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="cta.consult"></span></a>
+  <div class="row">
+    <a class="btn btn-line" href="../login.html"><svg class="ic" aria-hidden="true"><use href="#i-user"/></svg><span data-i18n="cta.login"></span></a>
+    <a class="btn btn-line" href="https://www.instagram.com/kj__fitness__/" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-ig"/></svg>Instagram</a>
+  </div>
+</div>
+
+<main>
+<section class="hero teal" id="home">
+  <div class="wrap">
+    <div class="hero-main">
+      <p class="hero-loc"><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg><span data-i18n="hero.location"></span></p>
+      <h1><span data-i18n="hero.title.l1">Empowered</span><span data-i18n="hero.title.l2">Through Movement</span></h1>
+      <p class="hero-mission" data-i18n="hero.mission"></p>
+      <div class="ctas">
+        <a class="btn btn-ink btn-xl" href="#" data-consult><svg class="ic ic-wa" aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="cta.consult"></span></a>
+        <a class="btn btn-line btn-xl" href="#about"><span data-i18n="cta.learn"></span><svg class="i-arr" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
+      </div>
+    </div>
+    <div class="hero-tiles">
+      <div class="tile tile-logo"><img src="assets/kj-logo.jpg" alt="" width="1080" height="1080"></div>
+      <div class="tile t-ink"><b data-i18n="about.f2.k"></b><span data-i18n="about.f2.v"></span></div>
+      <a class="tile t-white" href="#services"><svg class="ic" aria-hidden="true"><use href="#i-leaf"/></svg><span><b style="display:block;font-size:1.35rem;margin-bottom:4px" data-i18n="s4.when"></b><span data-i18n="s4.t"></span></span></a>
+      <div class="tile t-deep"><b data-i18n="about.f1.k"></b><span data-i18n="about.f1.v"></span></div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="about-photo">
+      <img src="assets/kirsten.jpg" alt="Kirsten Jemma, founder of KJ Fitness, training with a barbell" data-i18n-alt="about.photo" width="1066" height="1600">
+      <p class="stamp" data-i18n="about.closing"></p>
+    </div>
+    <div>
+      <p class="kicker" style="color:var(--t800)" data-i18n="about.eyebrow"></p>
+      <h2 data-i18n="about.title"></h2>
+      <p data-i18n="about.p1"></p>
+      <p data-i18n="about.p2"></p>
+      <p data-i18n="about.p3"></p>
+      <ul class="stats">
+        <li><b data-i18n="about.f1.k"></b><span data-i18n="about.f1.v"></span></li>
+        <li><b data-i18n="about.f2.k"></b><span data-i18n="about.f2.v"></span></li>
+        <li><b data-i18n="about.f3.k"></b><span data-i18n="about.f3.v"></span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="approach ink" id="approach">
+  <div class="wrap">
+    <div class="head">
+      <div><p class="kicker" style="color:var(--t500)" data-i18n="approach.eyebrow"></p><h2 data-i18n="approach.title"></h2></div>
+      <p data-i18n="approach.sub"></p>
+    </div>
+    <ol class="pillars">
+      <li class="tile t-teal"><span class="n">01</span><div><h3 data-i18n="p1.t"></h3><p data-i18n="p1.d"></p></div></li>
+      <li class="tile t-white"><span class="n">02</span><div><h3 data-i18n="p2.t"></h3><p data-i18n="p2.d"></p></div></li>
+      <li class="tile t-deep"><span class="n">03</span><div><h3 data-i18n="p3.t"></h3><p data-i18n="p3.d"></p></div></li>
+      <li class="tile t-light"><span class="n">04</span><div><h3 data-i18n="p4.t"></h3><p data-i18n="p4.d"></p></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="events" id="events" data-state="full">
+  <div class="wrap">
+    <div class="head">
+      <div><p class="kicker" style="color:var(--t800)" data-i18n="events.eyebrow"></p><h2 data-i18n="events.title"></h2></div>
+      <div><p data-i18n="events.sub" style="margin-bottom:12px"></p><span class="sample"><svg class="ic" aria-hidden="true"><use href="#i-flag"/></svg><span data-i18n="events.sample"></span></span></div>
+    </div>
+    <div class="ev-grid">
+      <article class="ev">
+        <div class="ev-date"><b data-i18n="e2.day"></b><span data-i18n="e2.mon"></span></div>
+        <div class="ev-body">
+          <h3 data-i18n="e2.t"></h3>
+          <div class="ev-meta"><span><svg class="ic" aria-hidden="true"><use href="#i-clock"/></svg><span><span data-i18n="e2.date"></span> · <span data-i18n="e2.time"></span></span></span><span><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg><span data-i18n="e2.loc"></span></span></div>
+          <div class="ev-foot"><span class="ev-price" data-i18n="e2.price"></span><a href="#" data-wa="events"><span data-i18n="events.book"></span><svg class="i-arr" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
+        </div>
+      </article>
+      <article class="ev">
+        <div class="ev-date"><b data-i18n="e1.day"></b><span data-i18n="e1.mon"></span></div>
+        <div class="ev-body">
+          <h3 data-i18n="e1.t"></h3>
+          <div class="ev-meta"><span><svg class="ic" aria-hidden="true"><use href="#i-clock"/></svg><span><span data-i18n="e1.date"></span> · <span data-i18n="e1.time"></span></span></span><span><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg><span data-i18n="e1.loc"></span></span></div>
+          <div class="ev-foot"><span class="ev-price" data-i18n="e1.price"></span><a href="#" data-wa="events"><span data-i18n="events.book"></span><svg class="i-arr" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
+        </div>
+      </article>
+    </div>
+    <div class="ev-empty">
+      <div class="sq"><svg class="ic" aria-hidden="true"><use href="#i-cal"/></svg></div>
+      <div class="body">
+        <div><h3 data-i18n="events.empty.t"></h3><p data-i18n="events.empty.d"></p></div>
+        <a class="btn btn-white" href="#" data-wa="events"><svg class="ic ic-wa" aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="events.empty.cta"></span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="quote teal" aria-label="Quote">
+  <div class="wrap">
+    <span class="qmark" aria-hidden="true">“</span>
+    <blockquote>
+      <p data-i18n="quote.text"></p>
+      <footer><b data-i18n="quote.by"></b><span data-i18n="quote.role"></span></footer>
+    </blockquote>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="head">
+      <div><p class="kicker" style="color:var(--t800)" data-i18n="svc.eyebrow"></p><h2 data-i18n="svc.title"></h2></div>
+      <p data-i18n="svc.sub"></p>
+    </div>
+    <div class="svc-grid">
+      <article class="svc t-white wide">
+        <div class="svc-top"><div><span class="tag" data-i18n="s1.tag"></span><h3 style="margin-top:12px" data-i18n="s1.t"></h3></div><span class="ic-box"><svg class="ic" aria-hidden="true"><use href="#i-user"/></svg></span></div>
+        <p data-i18n="s1.d"></p>
+        <ul class="rates">
+          <li><span data-i18n="s1.r1"></span><b data-i18n="s1.r1p"></b><small data-i18n="svc.min"></small></li>
+          <li><span data-i18n="s1.r2"></span><b data-i18n="s1.r2p"></b><small data-i18n="svc.min"></small></li>
+          <li><span data-i18n="s1.r3"></span><b data-i18n="s1.r3p"></b><small data-i18n="svc.min"></small></li>
+        </ul>
+        <a class="btn btn-ink" href="#" data-wa="personal"><svg class="ic ic-wa" aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="s1.cta"></span></a>
+      </article>
+      <article class="svc t-white">
+        <div class="svc-top"><span class="tag" data-i18n="s2.tag"></span><span class="ic-box"><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg></span></div>
+        <h3 data-i18n="s2.t"></h3>
+        <div class="price"><b data-i18n="s2.price"></b><span data-i18n="svc.month"></span></div>
+        <p data-i18n="s2.d"></p>
+        <ul class="feat"><li data-i18n="s2.f1"></li><li data-i18n="s2.f2"></li><li data-i18n="s2.f3"></li><li data-i18n="s2.f4"></li></ul>
+        <a class="btn btn-ink" href="#" data-wa="online"><svg class="ic ic-wa" aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="s2.cta"></span></a>
+      </article>
+      <article class="svc t-teal">
+        <div class="svc-top"><span class="tag" data-i18n="s3.tag"></span><span class="ic-box"><svg class="ic" aria-hidden="true"><use href="#i-layers"/></svg></span></div>
+        <h3 data-i18n="s3.t"></h3>
+        <div class="price"><b data-i18n="s3.price"></b><span data-i18n="svc.month"></span></div>
+        <p data-i18n="s3.d"></p>
+        <ul class="feat"><li data-i18n="s3.f1"></li><li data-i18n="s3.f2"></li><li data-i18n="s3.f3"></li></ul>
+        <a class="btn btn-ink" href="#" data-wa="hybrid"><svg class="ic ic-wa" aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="s3.cta"></span></a>
+      </article>
+      <article class="svc t-deep">
+        <div class="svc-top"><span class="tag" data-i18n="s4.tag"></span><span class="ic-box"><svg class="ic" aria-hidden="true"><use href="#i-leaf"/></svg></span></div>
+        <h3 data-i18n="s4.t"></h3>
+        <div class="price"><b data-i18n="s4.price"></b><span data-i18n="svc.month"></span></div>
+        <p data-i18n="s4.d"></p>
+        <ul class="feat"><li data-i18n="s4.f1"></li><li data-i18n="s4.f2"></li><li data-i18n="s4.f3"></li><li data-i18n="s4.f4"></li><li data-i18n="s4.f5"></li></ul>
+        <a class="btn btn-white" href="#" data-wa="longevity"><svg class="ic ic-wa" aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="s4.cta"></span></a>
+      </article>
+      <article class="svc t-ink">
+        <div class="svc-top"><span class="tag" data-i18n="s5.tag"></span><span class="ic-box"><svg class="ic" aria-hidden="true"><use href="#i-building"/></svg></span></div>
+        <h3 data-i18n="s5.t"></h3>
+        <div class="price"><b style="font-size:clamp(1.7rem,2.6vw,2.2rem)" data-i18n="s5.price"></b></div>
+        <p data-i18n="s5.d"></p>
+        <ul class="feat"><li data-i18n="s5.f1"></li><li data-i18n="s5.f2"></li><li data-i18n="s5.f3"></li><li data-i18n="s5.f4"></li></ul>
+        <a class="btn btn-white" href="#" data-wa="corporate"><svg class="ic ic-wa" aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="s5.cta"></span></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="contact teal" id="contact">
+  <div class="wrap">
+    <p class="kicker" data-i18n="contact.eyebrow"></p>
+    <h2 data-i18n="contact.title"></h2>
+    <p class="lead" data-i18n="contact.sub"></p>
+    <a class="btn btn-ink btn-xl" href="#" data-consult><svg class="ic ic-wa" aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="contact.cta"></span></a>
+    <div class="chan">
+      <a class="tile t-ink" href="#" data-wa="general"><svg class="ic" aria-hidden="true"><use href="#i-wa"/></svg><span><b style="display:block" data-i18n="c.wa"></b><span data-i18n="c.wa.v"></span><br><span data-i18n="c.wa.d"></span></span></a>
+      <a class="tile t-white" href="https://www.instagram.com/kj__fitness__/" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-ig"/></svg><span><b style="display:block" data-i18n="c.ig"></b><span data-i18n="c.ig.v"></span><br><span data-i18n="c.ig.d"></span></span></a>
+      <a class="tile t-light" href="https://www.facebook.com/KirstenMMA" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-fb"/></svg><span><b style="display:block" data-i18n="c.fb"></b><span data-i18n="c.fb.v"></span><br><span data-i18n="c.fb.d"></span></span></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot ink">
+  <div class="wrap">
+    <a class="brand" href="#home"><img src="assets/kj-logo.jpg" alt="KJ Fitness logo" width="48" height="48"><span>KJ Fitness</span></a>
+    <p class="tagline" data-i18n="footer.tagline"></p>
+    <div class="social">
+      <a href="https://www.instagram.com/kj__fitness__/" target="_blank" rel="noopener" aria-label="Instagram"><svg class="ic" aria-hidden="true"><use href="#i-ig"/></svg></a>
+      <a href="https://www.facebook.com/KirstenMMA" target="_blank" rel="noopener" aria-label="Facebook"><svg class="ic" aria-hidden="true"><use href="#i-fb"/></svg></a>
+      <a href="#" data-wa="general" aria-label="WhatsApp"><svg class="ic" aria-hidden="true"><use href="#i-wa"/></svg></a>
+    </div>
+    <p class="copy" data-i18n="footer.copy"></p>
+  </div>
+</footer>
+
+<div class="modal" id="consult" hidden role="dialog" aria-modal="true" aria-labelledby="consult-title">
+  <div class="modal-box">
+    <div class="modal-head">
+      <p class="kicker" data-i18n="modal.eyebrow"></p>
+      <h2 id="consult-title" data-i18n="modal.title"></h2>
+      <p data-i18n="modal.sub"></p>
+    </div>
+    <button class="modal-x" data-close data-i18n-aria="modal.close"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg></button>
+    <ul class="opts">
+      <li><a class="consult-opt" href="#" data-wa="personal"><svg class="ic" aria-hidden="true"><use href="#i-user"/></svg><span class="row"><span data-i18n="m.personal"></span><svg class="i-arr" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span></a></li>
+      <li><a class="consult-opt" href="#" data-wa="online"><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg><span class="row"><span data-i18n="m.online"></span><svg class="i-arr" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span></a></li>
+      <li><a class="consult-opt" href="#" data-wa="hybrid"><svg class="ic" aria-hidden="true"><use href="#i-layers"/></svg><span class="row"><span data-i18n="m.hybrid"></span><svg class="i-arr" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span></a></li>
+      <li><a class="consult-opt" href="#" data-wa="longevity"><svg class="ic" aria-hidden="true"><use href="#i-leaf"/></svg><span class="row"><span data-i18n="m.longevity"></span><svg class="i-arr" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span></a></li>
+      <li><a class="consult-opt" href="#" data-wa="corporate"><svg class="ic" aria-hidden="true"><use href="#i-building"/></svg><span class="row"><span data-i18n="m.corporate"></span><svg class="i-arr" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span></a></li>
+      <li><a class="consult-opt" href="#" data-wa="general"><svg class="ic" aria-hidden="true"><use href="#i-chat"/></svg><span class="row"><span data-i18n="m.general"></span><svg class="i-arr" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span></a></li>
+    </ul>
+    <p class="modal-foot"><svg class="ic" aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="modal.foot"></span></p>
+  </div>
+</div>
+
+<div class="proto" role="group" aria-label="Prototype control"><span data-i18n="proto.events">Events</span><button data-events-btn="full" data-i18n="proto.full">With events</button><button data-events-btn="empty" data-i18n="proto.empty">Empty</button></div>
+
+<script src="kj-proto.js"></script>
+</body>
+</html>
